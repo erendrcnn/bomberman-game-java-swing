@@ -8,6 +8,9 @@ This project is a Java application that implements the Bomberman game using Java
 ## Structure of the Assignment
 The Bomberman game is developed using the following classes and components:
 
+![Simple Diagram](DiyagramBasit.png)
+
+
 ### Mapping
 - **FileMapping**: A class for reading and processing map files.
 - **Coordinate**: Manages the coordinates of objects in the game.
