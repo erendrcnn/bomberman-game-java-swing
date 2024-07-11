@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="bomberman-oyun:jar">
+    <output-path>$PROJECT_DIR$/classes/artifacts/bomberman_oyun_jar</output-path>
+    <root id="archive" name="bomberman-oyun.jar">
+      <element id="module-output" name="bomberman-oyun" />
+      <element id="library" level="module" name="res" module-name="bomberman-oyun" />
+    </root>
+  </artifact>
+</component>
