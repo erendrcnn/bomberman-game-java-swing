@@ -1,6 +1,6 @@
 # Bomberman Java Game
 
-![bombarman-turkce-oyun](https://github.com/erendrcnn/bomberman-game-java/assets/70805475/d3693c8c-7c02-4ab0-8b20-f27fe90e1979)
+![bombarman-turkce](https://github.com/erendrcnn/bomberman-game-java-swing/assets/70805475/36a16d6c-7d54-4b2f-86b9-1ecefb2b8472)
 
 ## Overview
 This project is a Java application that implements the Bomberman game using Java Swing. The player's goal is to reach the door behind destructible walls and blow up monsters to pass through the door. The player must achieve these objectives within a specified time (200 seconds). The project includes aspects of game development, graphical design, algorithm development, and multithreading.
