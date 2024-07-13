@@ -227,7 +227,7 @@ public class OyunTahtasi implements Guncelleme {
      */
     protected void zamanDolduMu() {
         if (_zaman <= 0)
-            haritaDegistir();
+            oyunBitir();
     }
 
     public void oyunBitir() {
