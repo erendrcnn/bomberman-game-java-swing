@@ -19,17 +19,41 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Oyuncu extends Karakter {
+public class Oyuncu extends Karakter implements Runnable {
     private List<Bomba> _bombalar;
     protected Klavye _girdi;
     protected int _timeBetweenPutBombs = 0;
     public static List<Ozellik> _ozellikler = new ArrayList<>();
+
+    private Thread oyuncuThread;
 
     public Oyuncu(int x, int y, OyunTahtasi oyunTahtasi) {
         super(x, y, oyunTahtasi);
         _bombalar = _oyunTahtasi.getBombalar();
         _girdi = _oyunTahtasi.getGirdi();
         _model = Model.oyuncu_sag;
+        oyuncuThread = new Thread(this);
+        oyuncuThread.start();
+    }
+
+    @Override
+    public void run() {
+        while (_canli) {
+            this.guncelle();
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                return;
+            }
+        }
+    }
+
+    public synchronized void stop() {
+        _canli = false;
+        if (oyuncuThread != null) {
+            oyuncuThread.interrupt();
+        }
     }
 
     /*
@@ -38,7 +62,7 @@ public class Oyuncu extends Karakter {
     |--------------------------------------------------------------------------
     */
     @Override
-    public void guncelle() {
+    public synchronized void guncelle() {
         bombaTemizlik();
         if (!_canli) {
             olumSonrasi();

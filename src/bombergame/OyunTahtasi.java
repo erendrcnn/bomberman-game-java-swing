@@ -9,6 +9,7 @@ import bombergame.varlik.Mesaj;
 import bombergame.varlik.Nesne;
 import bombergame.varlik.karakter.Karakter;
 import bombergame.varlik.karakter.Oyuncu;
+import bombergame.varlik.karakter.dusman.Enemy;
 import bombergame.varlik.nesne.ozellik.Ozellik;
 import bombergame.varlik.saldiri.Bomba;
 import bombergame.varlik.saldiri.Patlama;
@@ -24,6 +25,7 @@ import java.util.Random;
 
 public class OyunTahtasi implements Guncelleme {
 
+    private static final boolean DEMO_MODE = false;
     protected Haritalama _haritalama;
     protected Oyun _oyun;
     protected Klavye _girdi;
@@ -107,7 +109,7 @@ public class OyunTahtasi implements Guncelleme {
         puanlar = Oyun.POINTS;
         Oyuncu._ozellikler.clear();
 
-        _oyun.oyuncuHiz = 1.0;
+        _oyun.oyuncuHiz = 0.7;
         _oyun.bombaAlan = 1;
         _oyun.bombaCephane = 1;
         _oyun.atlama = false;
@@ -115,6 +117,15 @@ public class OyunTahtasi implements Guncelleme {
     }
 
     public void haritaDegistir() {
+        // Tüm karakter ve thread'leri durdur
+        for (Karakter karakter : _karakterler) {
+            if (karakter instanceof Oyuncu) {
+                ((Oyuncu) karakter).stop();
+            } else if (karakter instanceof Enemy) {
+                ((Enemy) karakter).stop();
+            }
+        }
+
         _zaman = Oyun.TIME;
         _gosterilenEkran = 2;
         _oyun.sifirlaEkranYenileme();
@@ -125,7 +136,12 @@ public class OyunTahtasi implements Guncelleme {
         _varliklar = null;
 
         haritaDosyasiOlustur("dunya/Harita.txt", 13, 33, seciliOzellik);
-        _haritalama = new DosyaHaritalama("dunya/Harita.txt", this);
+
+        if (DEMO_MODE)
+            _haritalama = new DosyaHaritalama("dunya/HaritaTest.txt", this);
+        else
+            _haritalama = new DosyaHaritalama("dunya/Harita.txt", this);
+
         _varliklar = new Nesne[_haritalama.getYukseklik() * _haritalama.getGenislik()];
 
         _haritalama.varlikOlustur();

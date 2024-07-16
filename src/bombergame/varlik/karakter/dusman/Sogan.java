@@ -12,7 +12,7 @@ public class Sogan extends Enemy {
         _model = Model.sogan_sol_1;
         algoritma = new GucluAlgoritma(_oyunTahtasi.getOyuncu(), this);
         _yon = algoritma.yonBelirle();
-        new Thread(this).start();
+        // Thread bir ust sinifta baslatiliyor. (Her sogan icin bir thread olusturulmasina gerek yok.)
     }
 
     @Override

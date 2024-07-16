@@ -32,5 +32,4 @@ public class OzellikHiz extends Ozellik {
         Oyun.addOyuncuHiz(0.25);
     }
 
-
 }

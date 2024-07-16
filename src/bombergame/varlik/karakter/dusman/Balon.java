@@ -13,7 +13,7 @@ public class Balon extends Enemy {
         _model = Model.balon_sol_1;
         algoritma = new StandartAlgo();
         _yon = algoritma.yonBelirle();
-        new Thread(this).start();
+        // Thread bir ust sinifta baslatiliyor. (Her balon icin bir thread olusturulmasina gerek yok.)
     }
 
     @Override
@@ -28,10 +28,5 @@ public class Balon extends Enemy {
                 _model = Model.movingSprite(Model.balon_sol_1, Model.balon_sol_2, Model.balon_sol_3, _animasyon, 60);
                 break;
         }
-    }
-
-    @Override
-    public void run() {
-
     }
 }

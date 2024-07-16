@@ -27,9 +27,10 @@ public abstract class Enemy extends Karakter implements Runnable {
     protected int finalAnaimasyon = 30;
     protected Model olumModeli;
 
+    private Thread enemyThread;
+
     public Enemy(int x, int y, OyunTahtasi oyunTahtasi, Model dead, double hizSabiti, int puanDegeri) {
         super(x, y, oyunTahtasi);
-
         this.puanDegeri = puanDegeri;
         this.hizSabiti = hizSabiti;
 
@@ -39,6 +40,9 @@ public abstract class Enemy extends Karakter implements Runnable {
 
         _gecenZaman = 20;
         olumModeli = dead;
+
+        enemyThread = new Thread(this);
+        enemyThread.start();
     }
 
     @Override
@@ -48,9 +52,16 @@ public abstract class Enemy extends Karakter implements Runnable {
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();  // Thread kesinti durumunu belirle
-                return;  // Thread'i sonlandır
+                Thread.currentThread().interrupt();
+                return;
             }
+        }
+    }
+
+    public synchronized void stop() {
+        _canli = false;
+        if (enemyThread != null) {
+            enemyThread.interrupt();
         }
     }
 
@@ -123,7 +134,7 @@ public abstract class Enemy extends Karakter implements Runnable {
     }
 
     @Override
-    public void hareketHesapla() {
+    public synchronized void hareketHesapla() {
         int xa = 0, ya = 0;
         if (adimSayi <= 0) {
             _yon = algoritma.yonBelirle();
@@ -184,6 +195,10 @@ public abstract class Enemy extends Karakter implements Runnable {
         int yy = Koordinat.pikseldenHuceye(yr) + (int) y;
 
         Nesne a = _oyunTahtasi.getVarlik(xx, yy, this); // Hareket etmek istediğimiz konumdaki nesne
+
+        if (a == null) {
+            return false;
+        }
 
         return a.kesisme(this);
     }

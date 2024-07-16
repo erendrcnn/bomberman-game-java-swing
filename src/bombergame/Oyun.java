@@ -24,7 +24,7 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
     private static final int BOMBAALAN = 1;
     private static final boolean BOMBAKONTROL = false;
     private static final boolean ATLAMA = false;
-    private static final double OYUNCUHIZ = 0.9;
+    private static final double OYUNCUHIZ = 0.7;
     private static final int EKRANYENILEME = 2;
     public static final int TIME = 200;
     public static final int POINTS = 0;
