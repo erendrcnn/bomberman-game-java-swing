@@ -5,7 +5,7 @@ import bombergame.OyunTahtasi;
 import bombergame.medya.Model;
 import bombergame.varlik.karakter.dusman.algo.StandartAlgo;
 
-public class Balon extends Enemy {
+public class Balon extends Canavar {
 
     public Balon(int x, int y, OyunTahtasi oyunTahtasi) {
         super(x, y, oyunTahtasi, Model.balon_olum, Oyun.getOyuncuHiz() / 2, 100);

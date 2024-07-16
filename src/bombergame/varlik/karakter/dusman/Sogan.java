@@ -5,7 +5,7 @@ import bombergame.OyunTahtasi;
 import bombergame.medya.Model;
 import bombergame.varlik.karakter.dusman.algo.GucluAlgoritma;
 
-public class Sogan extends Enemy {
+public class Sogan extends Canavar {
 
     public Sogan(int x, int y, OyunTahtasi oyunTahtasi) {
         super(x, y, oyunTahtasi, Model.sogan_olum, Oyun.getOyuncuHiz() * 2 / 3, 200);

@@ -14,7 +14,7 @@ import bombergame.varlik.saldiri.PatlamaYayilim;
 
 import java.awt.*;
 
-public abstract class Enemy extends Karakter implements Runnable {
+public abstract class Canavar extends Karakter implements Runnable {
     protected int puanDegeri;
     protected double hizSabiti;
     protected Algoritma algoritma;
@@ -27,9 +27,9 @@ public abstract class Enemy extends Karakter implements Runnable {
     protected int finalAnaimasyon = 30;
     protected Model olumModeli;
 
-    private Thread enemyThread;
+    private Thread dusmanThread;
 
-    public Enemy(int x, int y, OyunTahtasi oyunTahtasi, Model dead, double hizSabiti, int puanDegeri) {
+    public Canavar(int x, int y, OyunTahtasi oyunTahtasi, Model dead, double hizSabiti, int puanDegeri) {
         super(x, y, oyunTahtasi);
         this.puanDegeri = puanDegeri;
         this.hizSabiti = hizSabiti;
@@ -41,8 +41,8 @@ public abstract class Enemy extends Karakter implements Runnable {
         _gecenZaman = 20;
         olumModeli = dead;
 
-        enemyThread = new Thread(this);
-        enemyThread.start();
+        dusmanThread = new Thread(this);
+        dusmanThread.start();
     }
 
     @Override
@@ -60,8 +60,8 @@ public abstract class Enemy extends Karakter implements Runnable {
 
     public synchronized void stop() {
         _canli = false;
-        if (enemyThread != null) {
-            enemyThread.interrupt();
+        if (dusmanThread != null) {
+            dusmanThread.interrupt();
         }
     }
 

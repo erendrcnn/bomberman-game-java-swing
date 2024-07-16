@@ -9,7 +9,7 @@ import bombergame.varlik.Mesaj;
 import bombergame.varlik.Nesne;
 import bombergame.varlik.karakter.Karakter;
 import bombergame.varlik.karakter.Oyuncu;
-import bombergame.varlik.karakter.dusman.Enemy;
+import bombergame.varlik.karakter.dusman.Canavar;
 import bombergame.varlik.nesne.ozellik.Ozellik;
 import bombergame.varlik.saldiri.Bomba;
 import bombergame.varlik.saldiri.Patlama;
@@ -121,8 +121,8 @@ public class OyunTahtasi implements Guncelleme {
         for (Karakter karakter : _karakterler) {
             if (karakter instanceof Oyuncu) {
                 ((Oyuncu) karakter).stop();
-            } else if (karakter instanceof Enemy) {
-                ((Enemy) karakter).stop();
+            } else if (karakter instanceof Canavar) {
+                ((Canavar) karakter).stop();
             }
         }
 

@@ -9,7 +9,7 @@ import bombergame.medya.Model;
 import bombergame.varlik.KatmanliNesne;
 import bombergame.varlik.Mesaj;
 import bombergame.varlik.Nesne;
-import bombergame.varlik.karakter.dusman.Enemy;
+import bombergame.varlik.karakter.dusman.Canavar;
 import bombergame.varlik.nesne.ozellik.Ozellik;
 import bombergame.varlik.saldiri.Bomba;
 import bombergame.varlik.saldiri.PatlamaYayilim;
@@ -112,7 +112,7 @@ public class Oyuncu extends Karakter implements Runnable {
 
     protected void bombaYerlestir(int x, int y) {
         Bomba b = new Bomba(x, y, _oyunTahtasi);
-        Enemy.bombaSavun(x, y);
+        Canavar.bombaSavun(x, y);
         _oyunTahtasi.addBomba(b);
         bombaYerlestirMuzik.muzikCal(0);
     }
@@ -234,7 +234,7 @@ public class Oyuncu extends Karakter implements Runnable {
             return false;
         }
 
-        if (e instanceof Enemy) {
+        if (e instanceof Canavar) {
             oldur();
             return true;
         }

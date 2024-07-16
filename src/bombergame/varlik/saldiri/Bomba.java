@@ -9,7 +9,7 @@ import bombergame.varlik.AnimasyonluNesne;
 import bombergame.varlik.Nesne;
 import bombergame.varlik.karakter.Karakter;
 import bombergame.varlik.karakter.Oyuncu;
-import bombergame.varlik.karakter.dusman.Enemy;
+import bombergame.varlik.karakter.dusman.Canavar;
 
 public class Bomba extends AnimasyonluNesne {
 
@@ -87,7 +87,7 @@ public class Bomba extends AnimasyonluNesne {
         _alevler = new PatlamaYayilim[4];
         for (int i = 0; i < _alevler.length; i++) {
             _alevler[i] = new PatlamaYayilim((int) _x, (int) _y, i, Oyun.getBombaAlan(), _oyunTahtasi);
-            Enemy.bombaSavunSifirla((int) _x, (int) _y);
+            Canavar.bombaSavunSifirla((int) _x, (int) _y);
         }
         bombaPatlamaMuzik.muzikCal(0);
     }

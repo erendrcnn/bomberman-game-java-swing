@@ -1,13 +1,13 @@
 package bombergame.varlik.karakter.dusman.algo;
 
 import bombergame.varlik.karakter.Oyuncu;
-import bombergame.varlik.karakter.dusman.Enemy;
+import bombergame.varlik.karakter.dusman.Canavar;
 
 public class GucluAlgoritma extends Algoritma {
     Oyuncu oyuncu;
-    Enemy dusman;
+    Canavar dusman;
 
-    public GucluAlgoritma(Oyuncu oyuncu, Enemy dusman) {
+    public GucluAlgoritma(Oyuncu oyuncu, Canavar dusman) {
         this.oyuncu = oyuncu;
         this.dusman = dusman;
     }
