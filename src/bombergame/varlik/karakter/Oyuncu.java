@@ -185,6 +185,9 @@ public class Oyuncu extends Karakter implements Runnable {
                 if (!Oyun.getAtlama()) {
                     takilmaKontrol(a);
                 }
+
+                System.out.println(a);
+                // KatmanliNesne üzerinden geçebilir ama etrafında saglam bir duvar varsa geçemez
                 return a instanceof KatmanliNesne && Oyun.getAtlama();
             }
         }

@@ -20,6 +20,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.Random;
 
@@ -355,55 +356,72 @@ public class OyunTahtasi implements Guncelleme {
     }
 
     public Bomba getBombaKonum(double x, double y) {
-        for (Bomba b : _bombalar) {
-            if (b.getX() == (int) x && b.getY() == (int) y)
-                return b;
-        }
+        try {
+            for (Bomba b : _bombalar) {
+                if (b.getX() == (int) x && b.getY() == (int) y)
+                    return b;
+            }
 
-        return null;
+            return null;
+        } catch (ConcurrentModificationException e) {
+            return null;
+        }
     }
 
     public Karakter getKarakterKonum(double x, double y) {
-        for (Karakter cur : _karakterler) {
-            if (cur.getXBoyut() == x && cur.getYBoyut() == y)
-                return cur;
-        }
+        try {
+            for (Karakter cur : _karakterler) {
+                if (cur.getX() == x && cur.getY() == y)
+                    return cur;
+            }
 
-        return null;
+            return null;
+        } catch (ConcurrentModificationException e) {
+            return null;
+        }
     }
 
     public Oyuncu getOyuncu() {
-        for (Karakter cur : _karakterler) {
-            if (cur instanceof Oyuncu)
-                return (Oyuncu) cur;
-        }
+        try {
+            for (Karakter cur : _karakterler) {
+                if (cur instanceof Oyuncu)
+                    return (Oyuncu) cur;
+            }
 
-        return null;
+            return null;
+        } catch (ConcurrentModificationException e) {
+            return null;
+        }
     }
 
     public Karakter getFarkiKarakter(int x, int y, Karakter a) {
-        for (Karakter cur : _karakterler) {
-            if (cur == a) {
-                continue;
+        try {
+            for (Karakter cur : _karakterler) {
+                if (cur == a) continue;
+                if (cur.getXBoyut() == x && cur.getYBoyut() == y) {
+                    return cur;
+                }
             }
 
-            if (cur.getXBoyut() == x && cur.getYBoyut() == y) {
-                return cur;
-            }
+            return null;
+        } catch (ConcurrentModificationException e) {
+            return null;
         }
-
-        return null;
     }
 
     public Patlama getPatlamaKonum(int x, int y) {
-        for (Bomba b : _bombalar) {
-            Patlama e = b.patlamaKonum(x, y);
-            if (e != null) {
-                return e;
+        try {
+            for (Bomba b : _bombalar) {
+                Patlama e = b.patlamaKonum(x, y);
+                if (e != null) {
+                    return e;
+                }
             }
-        }
 
-        return null;
+            return null;
+        } catch (ConcurrentModificationException e) {
+            return null;
+        }
     }
 
     public Nesne getVarlikKonum(double x, double y) {
