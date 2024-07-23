@@ -120,7 +120,7 @@ public class DosyaHaritalama extends Haritalama implements SabitDegiskenler {
                         new SaglamZemin(x, y, kirilabilirDuvar));
 
                 if (!oyunTahtasi.ozellikKullanildiMi(x, y)) {
-                    layer.addBeforeTop(new OzellikBomba(x, y, Model.ozellik_bomba));
+                    layer.addBeforeTop(new OzellikBomba(x, y, oyunTahtasi, Model.ozellik_bomba));
                 }
 
                 oyunTahtasi.addVarlik(pos, layer);
@@ -131,7 +131,7 @@ public class DosyaHaritalama extends Haritalama implements SabitDegiskenler {
                         new SaglamZemin(x, y, kirilabilirDuvar));
 
                 if (!oyunTahtasi.ozellikKullanildiMi(x, y)) {
-                    layer.addBeforeTop(new OzellikHiz(x, y, Model.ozellik_hiz));
+                    layer.addBeforeTop(new OzellikHiz(x, y, oyunTahtasi, Model.ozellik_hiz));
                 }
 
                 oyunTahtasi.addVarlik(pos, layer);
@@ -142,7 +142,7 @@ public class DosyaHaritalama extends Haritalama implements SabitDegiskenler {
                         new SaglamZemin(x, y, kirilabilirDuvar));
 
                 if (!oyunTahtasi.ozellikKullanildiMi(x, y)) {
-                    layer.addBeforeTop(new OzellikMenzil(x, y, Model.ozellik_menzil));
+                    layer.addBeforeTop(new OzellikMenzil(x, y, oyunTahtasi, Model.ozellik_menzil));
                 }
 
                 oyunTahtasi.addVarlik(pos, layer);
@@ -153,7 +153,7 @@ public class DosyaHaritalama extends Haritalama implements SabitDegiskenler {
                         new SaglamZemin(x, y, kirilabilirDuvar));
 
                 if (!oyunTahtasi.ozellikKullanildiMi(x, y)) {
-                    layer.addBeforeTop(new OzellikKumanda(x, y, Model.ozellik_kumanda));
+                    layer.addBeforeTop(new OzellikKumanda(x, y, oyunTahtasi, Model.ozellik_kumanda));
                 }
 
                 oyunTahtasi.addVarlik(pos, layer);
@@ -164,7 +164,7 @@ public class DosyaHaritalama extends Haritalama implements SabitDegiskenler {
                         new SaglamZemin(x, y, kirilabilirDuvar));
 
                 if (!oyunTahtasi.ozellikKullanildiMi(x, y)) {
-                    layer.addBeforeTop(new OzellikAtlama(x, y, Model.ozellik_atlama));
+                    layer.addBeforeTop(new OzellikAtlama(x, y, oyunTahtasi, Model.ozellik_atlama));
                 }
 
                 oyunTahtasi.addVarlik(pos, layer);
