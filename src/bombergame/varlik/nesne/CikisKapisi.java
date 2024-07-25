@@ -47,7 +47,7 @@ public class CikisKapisi extends Zemin {
 
             if (e.getXBoyut() == getX() && e.getYBoyut() == getY()) {
                 if (_oyunTahtasi.dusmanlarTemizlendi())
-                    _oyunTahtasi.oyunBitir();
+                    _oyunTahtasi.seviyeAtlama();
             }
 
             return true;

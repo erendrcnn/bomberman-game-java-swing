@@ -44,5 +44,8 @@ public class OzellikBomba extends Ozellik {
         Oyun.addBombaCephane(1);
     }
 
-
+    @Override
+    public String toString() {
+        return "OzellikBomba";
+    }
 }

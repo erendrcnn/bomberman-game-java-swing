@@ -43,4 +43,9 @@ public class OzellikMenzil extends Ozellik {
         _aktif = true;
         Oyun.addBombaMenzil(1);
     }
+
+    @Override
+    public String toString() {
+        return "OzellikMenzil";
+    }
 }

@@ -42,4 +42,8 @@ public class OzellikHiz extends Ozellik {
         Oyun.addOyuncuHiz(0.25);
     }
 
+    @Override
+    public String toString() {
+        return "OzellikHiz";
+    }
 }

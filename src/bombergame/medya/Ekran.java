@@ -152,7 +152,7 @@ public class Ekran implements SabitDegiskenler {
         ortaMetinCiz("Tekrar Dene", getGercekGenislik() + 10, getGercekYukseklik() - targetHeight + 1524 / Oyun.SCALE, g);
     }
 
-    public void pyunYuklemeCiz(Graphics g) {
+    public void oyunYuklemeCiz(Graphics g) {
         g.setColor(Color.black);
         g.fillRect(0, 0, getGercekGenislik(), getGercekYukseklik());
 

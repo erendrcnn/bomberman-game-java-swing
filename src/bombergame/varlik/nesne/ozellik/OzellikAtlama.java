@@ -46,4 +46,9 @@ public class OzellikAtlama extends Ozellik {
         _aktif = true;
         Oyun.setAtlama(true);
     }
+
+    @Override
+    public String toString() {
+        return "OzellikAtlama";
+    }
 }

@@ -19,10 +19,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
+import java.util.*;
 import java.util.List;
-import java.util.Random;
 
 public class OyunTahtasi implements Guncelleme {
 
@@ -41,7 +39,10 @@ public class OyunTahtasi implements Guncelleme {
 
     private int _zaman = Oyun.TIME;
     private int puanlar = Oyun.POINTS;
+    private int seviye = Oyun.SEVIYE;
+    private int can = Oyun.CAN;
     public static char seciliOzellik = 'A';
+    public static ArrayList<Character> ozellikListe = new ArrayList<>(Arrays.asList('A', 'K', 'M', 'H', 'B'));
 
     public OyunTahtasi(Oyun oyun, Klavye input, Ekran screen) {
         _oyun = oyun;
@@ -108,6 +109,8 @@ public class OyunTahtasi implements Guncelleme {
     @SuppressWarnings("static-access")
     private void degerleriSifirla() {
         puanlar = Oyun.POINTS;
+        seviye = Oyun.SEVIYE;
+        can = Oyun.CAN;
         Oyuncu._ozellikler.clear();
 
         _oyun.oyuncuHiz = 0.7;
@@ -248,7 +251,40 @@ public class OyunTahtasi implements Guncelleme {
     }
 
     public void oyunBitir() {
-        _gosterilenEkran = 1;
+        if (can > 1) {
+            _gosterilenEkran = 2;
+            _oyun.sifirlaEkranYenileme();
+            _oyun.duraklat();
+            _oyun.oyunBitti = true;
+            if (getPuanlar() >= _oyun.getMaxPuan()) {
+                _oyun.setMaxPuan(getPuanlar());
+                _oyun.maxSkorKaydet();
+            }
+            haritaDegistir();
+            setCan(getCan() - 1);
+        } else {
+            setCan(getCan() - 1);
+            _gosterilenEkran = 1;
+            _oyun.sifirlaEkranYenileme();
+            _oyun.duraklat();
+            _oyun.oyunBitti = true;
+            if (getPuanlar() >= _oyun.getMaxPuan()) {
+                _oyun.setMaxPuan(getPuanlar());
+                _oyun.maxSkorKaydet();
+            }
+        }
+    }
+
+    @SuppressWarnings("static-access")
+    public void seviyeAtlama() {
+        _gosterilenEkran = 2;
+        Random r = new Random();
+        if (!ozellikListe.isEmpty())
+            seciliOzellik = ozellikListe.get(r.nextInt(ozellikListe.size()));
+        else
+            seciliOzellik = '*';
+
+        Oyun.addBombaCephane(getBombalar().size());
         _oyun.sifirlaEkranYenileme();
         _oyun.duraklat();
         _oyun.oyunBitti = true;
@@ -256,6 +292,18 @@ public class OyunTahtasi implements Guncelleme {
             _oyun.setMaxPuan(getPuanlar());
             _oyun.maxSkorKaydet();
         }
+
+        // Diger islemlerin bitmesi icin biraz bekleyelim
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        haritaDegistir();
+        _oyun.bombaKontrol = false;
+        setSeviye(getSeviye() + 1);
+        setCan(getCan() + 1);
     }
 
     public boolean dusmanlarTemizlendi() {
@@ -312,7 +360,7 @@ public class OyunTahtasi implements Guncelleme {
                 _ekran.oyunBittiCiz(g, puanlar, _oyun.getMaxPuan());
                 break;
             case 2:
-                _ekran.pyunYuklemeCiz(g);
+                _ekran.oyunYuklemeCiz(g);
                 break;
             case 3:
                 _ekran.oyunDuraklamaCiz(g);
@@ -546,6 +594,22 @@ public class OyunTahtasi implements Guncelleme {
 
     public void setZaman(int i) {
         _zaman = i;
+    }
+
+    public int getSeviye() {
+        return seviye;
+    }
+
+    public void setSeviye(int i) {
+        seviye = i;
+    }
+
+    public int getCan() {
+        return can;
+    }
+
+    public void setCan(int i) {
+        can = i;
     }
 
     public int zamanAzalt() {

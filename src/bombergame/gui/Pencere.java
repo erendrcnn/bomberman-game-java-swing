@@ -43,31 +43,19 @@ public class Pencere extends JFrame {
         return _bilgipanel;
     }
 
-    public void yeniOyun() {
-        _oyun.getOyunTahtasi().yeniOyun();
-    }
-
-    public void seviyeDegistir() {
-        _oyun.getOyunTahtasi().haritaDegistir();
-    }
-
-    public void oyunMola() {
-        _oyun.getOyunTahtasi().oyunDuraklatAyarlar();
-    }
-
-    public void oyunDevam() {
-        _oyun.getOyunTahtasi().oyunDevam();
-    }
-
-    public boolean oyunDevamMi() {
-        return _oyun.oyunDevamMi();
-    }
-
     public void setZaman(int time) {
         _bilgipanel.setZaman(time);
     }
 
     public void setPuan(int points) {
         _bilgipanel.setPuan(points);
+    }
+
+    public void setSeviye(int level) {
+        _bilgipanel.setSeviye(level);
+    }
+
+    public void setCan(int health) {
+        _bilgipanel.setCan(health);
     }
 }

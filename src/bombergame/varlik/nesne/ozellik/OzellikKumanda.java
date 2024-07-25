@@ -44,4 +44,9 @@ public class OzellikKumanda extends Ozellik {
         _aktif = true;
         Oyun.setKontrol(true);
     }
+
+    @Override
+    public String toString() {
+        return "OzellikKumanda";
+    }
 }

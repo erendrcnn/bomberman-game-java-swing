@@ -1,6 +1,6 @@
 # Bomberman Java Game
 
-![bombarman-turkce](https://github.com/erendrcnn/bomberman-game-java-swing/assets/70805475/36a16d6c-7d54-4b2f-86b9-1ecefb2b8472)
+![bombarman-turkce](gameplay.gif)
 
 ## Overview
 This project is a Java application that implements the Bomberman game using Java Swing. The player's goal is to reach the door behind destructible walls and blow up monsters to pass through the door. The player must achieve these objectives within a specified time (200 seconds). The project includes aspects of game development, graphical design, algorithm development, and multithreading.
@@ -108,14 +108,41 @@ The player can gain different abilities throughout the game, which provide advan
 ## Working and Non-working Parts
 ### Working Parts:
 - Player movements, constraints, and bomb placement.
-- Destruction of destructible walls by bomb explosions.
-- Random movement of monsters via threading and game end upon contact with the player.
-- Working features granting the player different abilities.
-- Finding the exit door and passing through it after killing all monsters.
-- Timer functionality, including pause and game end upon timeout.
-- Saving game state to a file upon pausing and restoring it upon resumption.
-- Feature changes via settings menu.
-- Functional start screen and initial settings.
+- Player and monster behaviors using multithreading.
+- Destruction of destructible walls by bomb explosions, ending the game if the player is hit, removing monsters if they are hit, and spawning an onion if the door or a feature is hit.
+- Random movements of monsters and ending the game if they contact the player.
+- Functional features granting the player different abilities.
+- Finding the door and passing through it after killing all monsters.
+- Timer functionality, including pausing and ending the game when the time runs out.
+- Saving game state to a file upon pausing and restoring it upon resumption (File I/O Integration).
+- Ability to change features via the settings menu.
+- Functional start screen.
+- Implementation of level and health systems.
 
 ### Non-working or Incomplete Parts:
 - No issues were identified in both the GUI and Java Swing source code.
+
+## Installation Instructions
+
+To run the Bomberman game on your local machine, follow these steps:
+
+1. Clone the Repository:
+   ```sh
+   git clone https://github.com/erendrcnn/bomberman-game-java-swing.git
+   cd bomberman-game-java-swing
+   ```
+
+2. Install Java Development Kit (JDK): Ensure that you have JDK 8 or higher installed on your machine. You can download it from Oracle's official site or use a package manager to install it.
+
+3. Compile the Code: Navigate to the src directory and compile the Java files:
+   ```sh
+   javac -d ../bin $(find . -name "*.java")
+   ```
+
+4. Run the Game: After compilation, navigate to the bin directory and run the main class:
+   ```sh
+   cd ../bin
+   java Main
+   ```
+
+5. Enjoy the Game! You should now be able to play the Bomberman game on your machine.

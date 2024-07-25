@@ -17,6 +17,11 @@ public abstract class Ozellik extends Zemin {
 
     public abstract void setDeger();
 
+    @Override
+    public String toString() {
+        return "Ozellik";
+    }
+
     public boolean isAktif() {
         return _aktif;
     }

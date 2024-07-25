@@ -254,6 +254,23 @@ public class Oyuncu extends Karakter implements Runnable {
         if (p.kaldirildiMi()) return;
 
         _ozellikler.add(p);
+        switch (p.toString()) {
+            case "OzellikBomba":
+                OyunTahtasi.ozellikListe.remove((Character) 'B');
+                break;
+            case "OzellikMenzil":
+                OyunTahtasi.ozellikListe.remove((Character) 'M');
+                break;
+            case "OzellikHiz":
+                OyunTahtasi.ozellikListe.remove((Character) 'H');
+                break;
+            case "OzellikKumanda":
+                OyunTahtasi.ozellikListe.remove((Character) 'K');
+                break;
+            case "OzellikAtlama":
+                OyunTahtasi.ozellikListe.remove((Character) 'A');
+                break;
+        }
         esyaAlmaMuzik.muzikCal(0);
         p.setDeger();
     }

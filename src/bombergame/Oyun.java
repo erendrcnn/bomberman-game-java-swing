@@ -28,6 +28,8 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
     private static final int EKRANYENILEME = 2;
     public static final int TIME = 200;
     public static final int POINTS = 0;
+    public static final int SEVIYE = 1;
+    public static final int CAN = 2;
     public static int _maxPuan = 0;
 
     protected static int bombaCephane = BOMBACEPHANE;
@@ -183,6 +185,8 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
             if (System.currentTimeMillis() - timer > 1000) {
                 _pencere.setZaman(_oyunTahtasi.zamanAzalt());
                 _pencere.setPuan(_oyunTahtasi.getPuanlar());
+                _pencere.setSeviye(_oyunTahtasi.getSeviye());
+                _pencere.setCan(_oyunTahtasi.getCan());
                 timer += 1000;
                 _pencere.setTitle(BASLIK);
 
@@ -196,6 +200,7 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
         try (BufferedWriter out = new BufferedWriter(new FileWriter("res/veri/kayit.txt"))) {
             out.write(_oyunTahtasi.getPuanlar() + "\n");
             out.write(_oyunTahtasi.getZaman() + "\n");
+            out.write(_oyunTahtasi.getSeviye() + "\n");
             out.write(_maxPuan + "\n");
             out.write(bombaCephane + "\n");
             out.write(bombaAlan + "\n");
@@ -218,6 +223,7 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
         try (BufferedReader in = new BufferedReader(new FileReader("res/veri/kayit.txt"))) {
             _oyunTahtasi.setPuanlar(Integer.parseInt(in.readLine()));
             _oyunTahtasi.setZaman(Integer.parseInt(in.readLine()));
+            _oyunTahtasi.setSeviye(Integer.parseInt(in.readLine()));
             _maxPuan = Integer.parseInt(in.readLine());
             bombaCephane = Integer.parseInt(in.readLine());
             bombaAlan = Integer.parseInt(in.readLine());

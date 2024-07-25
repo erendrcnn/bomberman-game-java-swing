@@ -14,6 +14,8 @@ public class BilgiPanel extends JPanel implements SabitDegiskenler {
 
     private JLabel zamanEtiket;
     private JLabel puanEtiket;
+    private JLabel seviyeEtiket;
+    private JLabel canEtiket;
     private JLabel sesEtiket;
     private JLabel ayarlarEtiket;
     private JLabel sifirlaEtiket;
@@ -47,6 +49,20 @@ public class BilgiPanel extends JPanel implements SabitDegiskenler {
         puanEtiket.setForeground(Color.white);
         puanEtiket.setHorizontalAlignment(JLabel.CENTER);
         puanEtiket.setHorizontalTextPosition(JLabel.CENTER);
+
+        seviyeEtiket = new JLabel();
+        seviyeEtiket.setIcon(barIkon);
+        seviyeEtiket.setText("Seviye: " + oyun.getOyunTahtasi().getSeviye());
+        seviyeEtiket.setForeground(Color.white);
+        seviyeEtiket.setHorizontalAlignment(JLabel.LEFT);
+        seviyeEtiket.setHorizontalTextPosition(JLabel.CENTER);
+
+        canEtiket = new JLabel();
+        canEtiket.setIcon(barIkon);
+        canEtiket.setText("Can: " + oyun.getOyunTahtasi().getCan());
+        canEtiket.setForeground(Color.white);
+        canEtiket.setHorizontalAlignment(JLabel.LEFT);
+        canEtiket.setHorizontalTextPosition(JLabel.CENTER);
 
         sesEtiket = new JLabel();
         sesEtiket.setLayout(new BorderLayout());
@@ -116,6 +132,8 @@ public class BilgiPanel extends JPanel implements SabitDegiskenler {
         add(bosEtiket1);
         add(zamanEtiket);
         add(puanEtiket);
+        add(seviyeEtiket);
+        add(canEtiket);
         add(bosEtiket2);
         add(sesEtiket);
         add(ayarlarEtiket);
@@ -149,6 +167,14 @@ public class BilgiPanel extends JPanel implements SabitDegiskenler {
 
     public void setPuan(int t) {
         this.puanEtiket.setText("Puan: " + t);
+    }
+
+    public void setSeviye(int t) {
+        this.seviyeEtiket.setText("Seviye: " + t);
+    }
+
+    public void setCan(int t) {
+        this.canEtiket.setText("Can: " + t);
     }
 
     public void arkaplanDegistir(Color c) {
