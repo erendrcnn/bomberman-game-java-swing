@@ -19,8 +19,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 public class OyunTahtasi implements Guncelleme {
 
@@ -295,7 +295,7 @@ public class OyunTahtasi implements Guncelleme {
 
         // Diger islemlerin bitmesi icin biraz bekleyelim
         try {
-            Thread.sleep(500);
+            Thread.sleep(200);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -530,32 +530,48 @@ public class OyunTahtasi implements Guncelleme {
      */
     protected void varlikGuncelle() {
         if (_oyun.oyunDurduMu()) return;
-        for (Nesne entity : _varliklar) {
-            entity.guncelle();
+
+        try {
+            for (Nesne entity : _varliklar) {
+                entity.guncelle();
+            }
+        } catch (ConcurrentModificationException e) {
         }
     }
 
     protected void karakterGuncelle() {
         if (_oyun.oyunDurduMu()) return;
-        for (Karakter karakter : _karakterler) {
-            if (!_oyun.oyunDurduMu()) {
-                karakter.guncelle();
+
+        try {
+            for (Karakter karakter : _karakterler) {
+                if (!_oyun.oyunDurduMu()) {
+                    karakter.guncelle();
+                }
             }
+        } catch (ConcurrentModificationException e) {
         }
     }
 
     protected void bombaGuncelle() {
         if (_oyun.oyunDurduMu()) return;
-        for (Bomba bomba : _bombalar) {
-            bomba.guncelle();
+
+        try {
+            for (Bomba bomba : _bombalar) {
+                bomba.guncelle();
+            }
+        } catch (ConcurrentModificationException e) {
         }
     }
 
     protected void mesajGuncelle() {
         if (_oyun.oyunDurduMu()) return;
         _mesajlar.removeIf(message -> message.getDuration() <= 0);
-        for (Mesaj message : _mesajlar) {
-            message.setDuration(message.getDuration() - 1);
+
+        try {
+            for (Mesaj message : _mesajlar) {
+                message.setDuration(message.getDuration() - 1);
+            }
+        } catch (ConcurrentModificationException e) {
         }
     }
 

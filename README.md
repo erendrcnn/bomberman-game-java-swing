@@ -142,7 +142,7 @@ To run the Bomberman game on your local machine, follow these steps:
 4. Run the Game: After compilation, navigate to the bin directory and run the main class:
    ```sh
    cd ../bin
-   java Main
+   java Bomberman
    ```
 
 5. Enjoy the Game! You should now be able to play the Bomberman game on your machine.
