@@ -411,7 +411,7 @@ public class OyunTahtasi implements Guncelleme {
             }
 
             return null;
-        } catch (ConcurrentModificationException e) {
+        } catch (ConcurrentModificationException | NoSuchElementException e) {
             return null;
         }
     }
@@ -424,7 +424,7 @@ public class OyunTahtasi implements Guncelleme {
             }
 
             return null;
-        } catch (ConcurrentModificationException e) {
+        } catch (ConcurrentModificationException | NoSuchElementException e) {
             return null;
         }
     }
@@ -437,7 +437,7 @@ public class OyunTahtasi implements Guncelleme {
             }
 
             return null;
-        } catch (ConcurrentModificationException e) {
+        } catch (ConcurrentModificationException | NoSuchElementException e) {
             return null;
         }
     }
@@ -452,7 +452,7 @@ public class OyunTahtasi implements Guncelleme {
             }
 
             return null;
-        } catch (ConcurrentModificationException e) {
+        } catch (ConcurrentModificationException | NoSuchElementException e) {
             return null;
         }
     }
@@ -467,7 +467,7 @@ public class OyunTahtasi implements Guncelleme {
             }
 
             return null;
-        } catch (ConcurrentModificationException e) {
+        } catch (ConcurrentModificationException | NoSuchElementException e) {
             return null;
         }
     }
@@ -535,7 +535,7 @@ public class OyunTahtasi implements Guncelleme {
             for (Nesne entity : _varliklar) {
                 entity.guncelle();
             }
-        } catch (ConcurrentModificationException e) {
+        } catch (ConcurrentModificationException | NoSuchElementException e) {
         }
     }
 
@@ -548,7 +548,7 @@ public class OyunTahtasi implements Guncelleme {
                     karakter.guncelle();
                 }
             }
-        } catch (ConcurrentModificationException e) {
+        } catch (ConcurrentModificationException | NoSuchElementException e) {
         }
     }
 
@@ -559,7 +559,7 @@ public class OyunTahtasi implements Guncelleme {
             for (Bomba bomba : _bombalar) {
                 bomba.guncelle();
             }
-        } catch (ConcurrentModificationException e) {
+        } catch (ConcurrentModificationException | NoSuchElementException e) {
         }
     }
 
@@ -571,7 +571,7 @@ public class OyunTahtasi implements Guncelleme {
             for (Mesaj message : _mesajlar) {
                 message.setDuration(message.getDuration() - 1);
             }
-        } catch (ConcurrentModificationException e) {
+        } catch (ConcurrentModificationException | NoSuchElementException e) {
         }
     }
 
