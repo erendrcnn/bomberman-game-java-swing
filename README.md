@@ -124,25 +124,45 @@ The player can gain different abilities throughout the game, which provide advan
 
 ## Installation Instructions
 
-To run the Bomberman game on your local machine, follow these steps:
+To run the Bomberman game on your local machine using IntelliJ IDEA, follow these steps:
 
-1. Clone the Repository:
+1. **Clone the Repository:**
    ```sh
    git clone https://github.com/erendrcnn/bomberman-game-java-swing.git
    cd bomberman-game-java-swing
    ```
 
-2. Install Java Development Kit (JDK): Ensure that you have JDK 8 or higher installed on your machine. You can download it from Oracle's official site or use a package manager to install it.
+2. **Install Java Development Kit (JDK):** Ensure that you have JDK 8 or higher installed on your machine. You can download it from Oracle's official site or use a package manager to install it.
 
-3. Compile the Code: Navigate to the src directory and compile the Java files:
-   ```sh
-   javac -d ../bin $(find . -name "*.java")
-   ```
+3. **Open the Project in IntelliJ IDEA:**
+   - Open IntelliJ IDEA.
+   - Click on **File** > **Open...**
+   - Navigate to the directory where you cloned the repository and select the `bomberman-game-java-swing` directory.
+   - Click **OK** to open the project.
 
-4. Run the Game: After compilation, navigate to the bin directory and run the main class:
-   ```sh
-   cd ../bin
-   java Bomberman
-   ```
+4. **Configure the Project SDK:**
+   - Go to **File** > **Project Structure...**
+   - In the **Project** section, ensure that the **Project SDK** is set to JDK 8 or higher. If not, click on **New...** and select the JDK installation directory.
 
-5. Enjoy the Game! You should now be able to play the Bomberman game on your machine.
+5. **Build the Project:**
+   - IntelliJ IDEA should automatically import the project and configure the dependencies. If not, you can trigger the build process manually.
+   - Go to **Build** > **Build Project** or use the shortcut `Ctrl+F9`.
+
+6. **Run the Game:**
+   - In the **Project** view, navigate to the `src` directory.
+   - Find the main class file that contains the `public static void main(String[] args)` method. This is typically named `Bomberman.java` or similar.
+   - Right-click on the main class file and select **Run 'Bomberman.main()'**. Alternatively, you can create a run configuration:
+     - Go to **Run** > **Edit Configurations...**
+     - Click on the **+** icon and select **Application**.
+     - Set the **Main class** to the main class of the project (`Bomberman`).
+     - Click **OK** and then **Run**.
+
+7. **Enjoy the Game!** You should now be able to play the Bomberman game on your machine.
+
+### License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+### Contributions
+
+Feel free to fork this repository, submit issues and pull requests. For major changes, please open an issue first to discuss what you would like to change.

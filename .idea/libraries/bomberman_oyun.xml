@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="bomberman-oyun">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/classes/artifacts/bomberman_oyun_jar/bomberman-oyun.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
