@@ -214,7 +214,7 @@ public class Ekran implements SabitDegiskenler {
                 g.drawString("Orman", Oyun.GENISLIK + 140, Oyun.YUKSEKLIK + 160);
                 break;
             case 4:
-                g.drawString("Sahil", Oyun.GENISLIK + 140, Oyun.YUKSEKLIK + 160);
+                g.drawString("Çöl", Oyun.GENISLIK + 140, Oyun.YUKSEKLIK + 160);
                 break;
         }
     }
