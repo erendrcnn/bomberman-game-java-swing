@@ -37,20 +37,24 @@ public class Ekran implements SabitDegiskenler {
         _pikseller = new int[width * height];
 
         try {
-            ayarlar = ImageIO.read(new File("res/model/ayarlar-tablo.png"));
+            ayarlar = ImageIO.read(new File(ayarlarPanel));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         try {
-            arkaPlan = ImageIO.read(new File("res/model/anamenu.png"));
+            arkaPlan = ImageIO.read(new File(arkaPlanPanel));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        arkaPlanSabitleme = arkaPlan.getScaledInstance(Oyun.GENISLIK * Oyun.SCALE, Oyun.YUKSEKLIK * Oyun.SCALE, Image.SCALE_DEFAULT);
+
+        if (arkaPlan != null)
+            arkaPlanSabitleme = arkaPlan.getScaledInstance(Oyun.GENISLIK * Oyun.SCALE, Oyun.YUKSEKLIK * Oyun.SCALE, Image.SCALE_DEFAULT);
+        else
+            arkaPlan = new BufferedImage(Oyun.GENISLIK * Oyun.SCALE, Oyun.YUKSEKLIK * Oyun.SCALE, BufferedImage.TYPE_INT_RGB);
 
         try {
-            yeniOyunGorseli = ImageIO.read(new File("res/model/yeni-oyun.png"));
+            yeniOyunGorseli = ImageIO.read(new File(yeniOyunPanel));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -124,7 +128,7 @@ public class Ekran implements SabitDegiskenler {
 
     public void yaziTipiYukle() {
         try {
-            File fontFile = new File("res/font/VBRUSHTB.ttf");
+            File fontFile = new File(fontDosyasi);
             yaziTipi = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.PLAIN, 60);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(yaziTipi);
@@ -136,7 +140,7 @@ public class Ekran implements SabitDegiskenler {
     public void oyunBittiCiz(Graphics g, int points, int highscore) {
         BufferedImage image = null;
         try {
-            image = ImageIO.read(new File("res/model/skor-tablo.png"));
+            image = ImageIO.read(new File(skorPanel));
         } catch (IOException e) {
             e.printStackTrace();
         }

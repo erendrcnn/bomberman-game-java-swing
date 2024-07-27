@@ -24,12 +24,6 @@ public class BilgiPanel extends JPanel implements SabitDegiskenler {
     private JButton sesButon;
     private JButton sifirlaButon;
 
-    private ImageIcon barIkon = new ImageIcon((new ImageIcon("res/model/merkez-bar.png")).getImage().getScaledInstance(80, 30, Image.SCALE_DEFAULT));
-    private ImageIcon ayarlarIkon = new ImageIcon((new ImageIcon("res/model/ayarlar.png")).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
-    private ImageIcon sesIkon = new ImageIcon((new ImageIcon("res/model/sesli.png")).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
-    private ImageIcon sessizIkon = new ImageIcon((new ImageIcon("res/model/sessiz.png")).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
-    private ImageIcon sifirlaIkon = new ImageIcon((new ImageIcon("res/model/sifirla.png")).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
-
     public BilgiPanel(Oyun oyun) {
         setLayout(new GridLayout(1, 8));
 

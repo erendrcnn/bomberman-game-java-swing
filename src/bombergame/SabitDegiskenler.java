@@ -4,6 +4,7 @@ import bombergame.medya.Model;
 import bombergame.medya.ModelYapisi;
 import bombergame.medya.Muzik;
 
+import javax.swing.*;
 import java.awt.*;
 
 public interface SabitDegiskenler {
@@ -42,6 +43,20 @@ public interface SabitDegiskenler {
     Model sag_ust_sinir = new Model(16, 1, 3, ModelYapisi.harita, 16, 16);
     Model sag_alt_sinir = new Model(16, 2, 3, ModelYapisi.harita, 16, 16);
     Model sol_alt_sinir = new Model(16, 3, 3, ModelYapisi.harita, 16, 16);
+
+    ImageIcon barIkon = new ImageIcon((new ImageIcon("res/model/merkez-bar.png")).getImage().getScaledInstance(80, 30, Image.SCALE_DEFAULT));
+    ImageIcon ayarlarIkon = new ImageIcon((new ImageIcon("res/model/ayarlar.png")).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+    ImageIcon sesIkon = new ImageIcon((new ImageIcon("res/model/sesli.png")).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+    ImageIcon sessizIkon = new ImageIcon((new ImageIcon("res/model/sessiz.png")).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+    ImageIcon sifirlaIkon = new ImageIcon((new ImageIcon("res/model/sifirla.png")).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+
+    String kayitDosyasi = "res/veri/kayit.txt";
+    String skorDosyasi = "res/veri/MaxSkor.txt";
+    String fontDosyasi = "res/font/VBRUSHTB.ttf";
+    String ayarlarPanel = "res/model/ayarlar-tablo.png";
+    String arkaPlanPanel = "res/model/anamenu.png";
+    String yeniOyunPanel = "res/model/yeni-oyun.png";
+    String skorPanel = "res/model/skor-tablo.png";
 
     Color arkaPlanRenk = new Color(0, 173, 57, 255);
 }

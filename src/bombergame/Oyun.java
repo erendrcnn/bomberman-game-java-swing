@@ -197,7 +197,7 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
     }
 
     public void oyunKayit() {
-        try (BufferedWriter out = new BufferedWriter(new FileWriter("res/veri/kayit.txt"))) {
+        try (BufferedWriter out = new BufferedWriter(new FileWriter(kayitDosyasi))) {
             out.write(_oyunTahtasi.getPuanlar() + "\n");
             out.write(_oyunTahtasi.getZaman() + "\n");
             out.write(_oyunTahtasi.getSeviye() + "\n");
@@ -220,7 +220,7 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
     }
 
     public void oyunKayitOku() {
-        try (BufferedReader in = new BufferedReader(new FileReader("res/veri/kayit.txt"))) {
+        try (BufferedReader in = new BufferedReader(new FileReader(kayitDosyasi))) {
             _oyunTahtasi.setPuanlar(Integer.parseInt(in.readLine()));
             _oyunTahtasi.setZaman(Integer.parseInt(in.readLine()));
             _oyunTahtasi.setSeviye(Integer.parseInt(in.readLine()));
@@ -243,7 +243,7 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
     }
 
     public void maxSkorOku() {
-        try (BufferedReader read = new BufferedReader(new FileReader(new File("res/veri/MaxSkor.txt")))) {
+        try (BufferedReader read = new BufferedReader(new FileReader(new File(skorDosyasi)))) {
             String score = read.readLine().trim();
             _maxPuan = score == null ? 0 : Integer.parseInt(score);
         } catch (IOException e) {
@@ -252,7 +252,7 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
     }
 
     public void maxSkorKaydet() {
-        try (FileWriter fileWriter = new FileWriter(new File("res/veri/MaxSkor.txt"))) {
+        try (FileWriter fileWriter = new FileWriter(new File(skorDosyasi))) {
             fileWriter.write(String.valueOf(_maxPuan));
         } catch (IOException e) {
             e.printStackTrace();
