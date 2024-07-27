@@ -24,7 +24,7 @@ import java.util.*;
 
 public class OyunTahtasi implements Guncelleme {
 
-    private static final boolean DEMO_MODE = true;
+    private static final boolean DEMO_MODE = false;
     protected Haritalama _haritalama;
     protected Oyun _oyun;
     protected Klavye _girdi;
