@@ -1,6 +1,7 @@
 package bombergame.gui;
 
 import bombergame.Oyun;
+import bombergame.OyunTahtasi;
 import bombergame.SabitDegiskenler;
 
 import javax.swing.*;
@@ -63,7 +64,20 @@ public class BilgiPanel extends JPanel implements SabitDegiskenler {
 
         sesButon = new JButton();
         sesButon.setIcon(sesIkon);
-        sesButon.setBackground(arkaPlanRenk);
+
+        switch (OyunTahtasi.seciliTema) {
+            case 2:
+                sesButon.setBackground(arkaPlanRenk2);
+                break;
+            case 3:
+                sesButon.setBackground(arkaPlanRenk3);
+                break;
+            case 4:
+                sesButon.setBackground(arkaPlanRenk4);
+                break;
+            default:
+                sesButon.setBackground(arkaPlanRenk);
+        }
         sesButon.setBorder(BorderFactory.createEmptyBorder());
         sesButon.setCursor(new Cursor(Cursor.HAND_CURSOR));
         sesButon.setModel(new SabitButon());
@@ -87,7 +101,20 @@ public class BilgiPanel extends JPanel implements SabitDegiskenler {
         ayarlarEtiket.setLayout(new BorderLayout());
 
         ayarlarButon = new JButton();
-        ayarlarButon.setBackground(arkaPlanRenk);
+
+        switch (OyunTahtasi.seciliTema) {
+            case 2:
+                ayarlarButon.setBackground(arkaPlanRenk2);
+                break;
+            case 3:
+                ayarlarButon.setBackground(arkaPlanRenk3);
+                break;
+            case 4:
+                ayarlarButon.setBackground(arkaPlanRenk4);
+                break;
+            default:
+                ayarlarButon.setBackground(arkaPlanRenk);
+        }
         ayarlarButon.setBorder(BorderFactory.createEmptyBorder());
         ayarlarButon.setCursor(new Cursor(Cursor.HAND_CURSOR));
         ayarlarButon.setIcon(ayarlarIkon);
@@ -107,7 +134,21 @@ public class BilgiPanel extends JPanel implements SabitDegiskenler {
         sifirlaEtiket.setLayout(new BorderLayout());
 
         sifirlaButon = new JButton();
-        sifirlaButon.setBackground(arkaPlanRenk);
+
+        switch (OyunTahtasi.seciliTema) {
+            case 2:
+                sifirlaButon.setBackground(arkaPlanRenk2);
+                break;
+            case 3:
+                sifirlaButon.setBackground(arkaPlanRenk3);
+                break;
+            case 4:
+                sifirlaButon.setBackground(arkaPlanRenk4);
+                break;
+            default:
+                sifirlaButon.setBackground(arkaPlanRenk);
+                break;
+        }
         sifirlaButon.setBorder(BorderFactory.createEmptyBorder());
         sifirlaButon.setCursor(new Cursor(Cursor.HAND_CURSOR));
         sifirlaButon.setIcon(sifirlaIkon);
@@ -132,7 +173,19 @@ public class BilgiPanel extends JPanel implements SabitDegiskenler {
         add(sesEtiket);
         add(ayarlarEtiket);
 
-        setBackground(arkaPlanRenk);
+        switch (OyunTahtasi.seciliTema) {
+            case 2:
+                setBackground(arkaPlanRenk2);
+                break;
+            case 3:
+                setBackground(arkaPlanRenk3);
+                break;
+            case 4:
+                setBackground(arkaPlanRenk4);
+                break;
+            default:
+                setBackground(arkaPlanRenk);
+        }
         setPreferredSize(new Dimension(0, 40));
     }
 

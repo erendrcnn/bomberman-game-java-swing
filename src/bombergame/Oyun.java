@@ -270,12 +270,14 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
         Rectangle exitSettingButton = new Rectangle(GENISLIK + 300, YUKSEKLIK - 60, 50, 50);
         Rectangle ozellikDegistirSagButon = new Rectangle(GENISLIK + 270, YUKSEKLIK + 40, 30, 30);
         Rectangle ozellikDegistirSolButon = new Rectangle(GENISLIK + 70, YUKSEKLIK + 40, 30, 30);
-        Rectangle tamamButon = new Rectangle(GENISLIK + 90, YUKSEKLIK + 140, 100, 50);
+        Rectangle temaDegistirSagButon = new Rectangle(GENISLIK + 270, YUKSEKLIK + 140, 30, 30);
+        Rectangle temaDegistirSolButon = new Rectangle(GENISLIK + 70, YUKSEKLIK + 140, 30, 30);
+        Rectangle tamamButon = new Rectangle(GENISLIK + 90, YUKSEKLIK + 220, 100, 50);
         Rectangle yeniOyunBaslatButon = new Rectangle(GENISLIK + 150, YUKSEKLIK + 100, 100, 40);
         Rectangle yeniOyunPencereKapatButon = new Rectangle(GENISLIK - 10, YUKSEKLIK + 100, 100, 40);
         Rectangle yeniOyunButon = new Rectangle(GENISLIK + 50, YUKSEKLIK + 170, 150, 50);
 
-        if (playButton.contains(e.getX(), e.getY()) && _menu) {
+        if (playButton.contains(e.getX(), e.getY()) && _menu && !ayarlarMenusu) {
             _menu = false;
             _oyunDevam = true;
         }
@@ -295,6 +297,7 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
         }
 
         handleOzellikDegistir(e, ozellikDegistirSagButon, ozellikDegistirSolButon);
+        handleTemaDegistir(e, temaDegistirSagButon, temaDegistirSolButon);
 
         if (tamamButon.contains(e.getX(), e.getY()) && ayarlarMenusu) {
             ayarlarMenusu = false;
@@ -303,7 +306,12 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
             } else {
                 getOyunTahtasi().yeniOyun();
             }
-            _pencere.getBilgiPanel().arkaplanDegistir(arkaPlanRenk);
+            switch (OyunTahtasi.seciliTema) {
+                case 2 -> _pencere.getBilgiPanel().arkaplanDegistir(arkaPlanRenk2);
+                case 3 -> _pencere.getBilgiPanel().arkaplanDegistir(arkaPlanRenk3);
+                case 4 -> _pencere.getBilgiPanel().arkaplanDegistir(arkaPlanRenk4);
+                default -> _pencere.getBilgiPanel().arkaplanDegistir(arkaPlanRenk);
+            }
         }
 
         if (yeniOyunBaslatButon.contains(e.getX(), e.getY()) && oyunYenilendi) {
@@ -342,6 +350,28 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
                 case 'H' -> 'A';
                 case 'K' -> 'H';
                 default -> OyunTahtasi.seciliOzellik;
+            };
+        }
+    }
+
+    private void handleTemaDegistir(MouseEvent e, Rectangle sagButon, Rectangle solButon) {
+        if (sagButon.contains(e.getX(), e.getY()) && ayarlarMenusu) {
+            OyunTahtasi.seciliTema = switch (OyunTahtasi.seciliTema) {
+                case 1 -> 2;
+                case 2 -> 3;
+                case 3 -> 4;
+                case 4 -> 1;
+                default -> OyunTahtasi.seciliTema;
+            };
+        }
+
+        if (solButon.contains(e.getX(), e.getY()) && ayarlarMenusu) {
+            OyunTahtasi.seciliTema = switch (OyunTahtasi.seciliTema) {
+                case 1 -> 4;
+                case 2 -> 1;
+                case 3 -> 2;
+                case 4 -> 3;
+                default -> OyunTahtasi.seciliTema;
             };
         }
     }

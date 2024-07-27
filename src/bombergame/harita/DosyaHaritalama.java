@@ -63,61 +63,126 @@ public class DosyaHaritalama extends Haritalama implements SabitDegiskenler {
 
     public void haritaVarlikEkle(char c, int x, int y) {
         int pos = x + y * getGenislik();
+        Model cikisKapisiSecili, saglamDuvarSecili, koridorSecili, kirilabilirDuvarSecili,
+                ust_sinirSecili, sol_sinirSecili, sag_sinirSecili, alt_sinirSecili, sol_ust_sinirSecili,
+                sag_ust_sinirSecili, sag_alt_sinirSecili, sol_alt_sinirSecili;
+
+        // Seçili temaya göre model nesnelerini belirle
+        switch (OyunTahtasi.seciliTema) {
+            case 2:
+                cikisKapisiSecili = cikisKapisi2;
+                saglamDuvarSecili = saglamDuvar2;
+                koridorSecili = koridor2;
+                kirilabilirDuvarSecili = kirilabilirDuvar2;
+                ust_sinirSecili = ust_sinir2;
+                sol_sinirSecili = sol_sinir2;
+                sag_sinirSecili = sag_sinir2;
+                alt_sinirSecili = alt_sinir2;
+                sol_ust_sinirSecili = sol_ust_sinir2;
+                sag_ust_sinirSecili = sag_ust_sinir2;
+                sag_alt_sinirSecili = sag_alt_sinir2;
+                sol_alt_sinirSecili = sol_alt_sinir2;
+                break;
+
+            case 3:
+                cikisKapisiSecili = cikisKapisi3;
+                saglamDuvarSecili = saglamDuvar3;
+                koridorSecili = koridor3;
+                kirilabilirDuvarSecili = kirilabilirDuvar3;
+                ust_sinirSecili = ust_sinir3;
+                sol_sinirSecili = sol_sinir3;
+                sag_sinirSecili = sag_sinir3;
+                alt_sinirSecili = alt_sinir3;
+                sol_ust_sinirSecili = sol_ust_sinir3;
+                sag_ust_sinirSecili = sag_ust_sinir3;
+                sag_alt_sinirSecili = sag_alt_sinir3;
+                sol_alt_sinirSecili = sol_alt_sinir3;
+                break;
+
+            case 4:
+                cikisKapisiSecili = cikisKapisi4;
+                saglamDuvarSecili = saglamDuvar4;
+                koridorSecili = koridor4;
+                kirilabilirDuvarSecili = kirilabilirDuvar4;
+                ust_sinirSecili = ust_sinir4;
+                sol_sinirSecili = sol_sinir4;
+                sag_sinirSecili = sag_sinir4;
+                alt_sinirSecili = alt_sinir4;
+                sol_ust_sinirSecili = sol_ust_sinir4;
+                sag_ust_sinirSecili = sag_ust_sinir4;
+                sag_alt_sinirSecili = sag_alt_sinir4;
+                sol_alt_sinirSecili = sol_alt_sinir4;
+                break;
+
+            default:
+                cikisKapisiSecili = cikisKapisi;
+                saglamDuvarSecili = saglamDuvar;
+                koridorSecili = koridor;
+                kirilabilirDuvarSecili = kirilabilirDuvar;
+                ust_sinirSecili = ust_sinir;
+                sol_sinirSecili = sol_sinir;
+                sag_sinirSecili = sag_sinir;
+                alt_sinirSecili = alt_sinir;
+                sol_ust_sinirSecili = sol_ust_sinir;
+                sag_ust_sinirSecili = sag_ust_sinir;
+                sag_alt_sinirSecili = sag_alt_sinir;
+                sol_alt_sinirSecili = sol_alt_sinir;
+        }
 
         // HARITA NESNELERI
         switch (c) {
             case '6': // Sol-Ust Kose
-                oyunTahtasi.addVarlik(pos, new Duvar(x, y, sol_ust_sinir));
+                oyunTahtasi.addVarlik(pos, new Duvar(x, y, sol_ust_sinirSecili));
                 break;
             case '7': // Sag-Ust Kose
-                oyunTahtasi.addVarlik(pos, new Duvar(x, y, sag_ust_sinir));
+                oyunTahtasi.addVarlik(pos, new Duvar(x, y, sag_ust_sinirSecili));
                 break;
             case '8': // Sag-Alt Kose
-                oyunTahtasi.addVarlik(pos, new Duvar(x, y, sag_alt_sinir));
+                oyunTahtasi.addVarlik(pos, new Duvar(x, y, sag_alt_sinirSecili));
                 break;
             case '9': // Sol-Alt Kose
-                oyunTahtasi.addVarlik(pos, new Duvar(x, y, sol_alt_sinir));
+                oyunTahtasi.addVarlik(pos, new Duvar(x, y, sol_alt_sinirSecili));
                 break;
             case 'T': // Ust sinir
-                oyunTahtasi.addVarlik(pos, new Duvar(x, y, ust_sinir));
+                oyunTahtasi.addVarlik(pos, new Duvar(x, y, ust_sinirSecili));
                 break;
             case 'L': // Sol sinir
-                oyunTahtasi.addVarlik(pos, new Duvar(x, y, sol_sinir));
+                oyunTahtasi.addVarlik(pos, new Duvar(x, y, sol_sinirSecili));
                 break;
             case 'R': // Sag sinir
-                oyunTahtasi.addVarlik(pos, new Duvar(x, y, sag_sinir));
+                oyunTahtasi.addVarlik(pos, new Duvar(x, y, sag_sinirSecili));
                 break;
             case 'D': // Alt sinir
-                oyunTahtasi.addVarlik(pos, new Duvar(x, y, alt_sinir));
+                oyunTahtasi.addVarlik(pos, new Duvar(x, y, alt_sinirSecili));
                 break;
 
             case '#': // Kirilamaz Duvar
-                oyunTahtasi.addVarlik(pos, new Duvar(x, y, saglamDuvar));
+                oyunTahtasi.addVarlik(pos, new Duvar(x, y, saglamDuvarSecili));
                 break;
             case '*': // Kirilabilir Duvar
                 oyunTahtasi.addVarlik(pos, new KatmanliNesne(x, y,
-                        new Koridor(x, y, koridor),
-                        new SaglamZemin(x, y, kirilabilirDuvar)));
+                        new Koridor(x, y, koridorSecili),
+                        new SaglamZemin(x, y, kirilabilirDuvarSecili)));
                 break;
             case 'P': // Cikis Kapisi
                 oyunTahtasi.addVarlik(pos, new KatmanliNesne(x, y,
-                        new Koridor(x, y, koridor),
-                        new CikisKapisi(x, y, oyunTahtasi, cikisKapisi),
-                        new SaglamZemin(x, y, kirilabilirDuvar)));
+                        new Koridor(x, y, koridorSecili),
+                        new CikisKapisi(x, y, oyunTahtasi, cikisKapisiSecili),
+                        new SaglamZemin(x, y, kirilabilirDuvarSecili)));
                 break;
 
             case 'C': // Oyuncu
                 haritaMatrix[y][x] = 1;
                 oyunTahtasi.addKarakter(new Oyuncu(Koordinat.hucredenPiksele(x), Koordinat.hucredenPiksele(y) + Oyun.KARE_BOYUT, oyunTahtasi));
                 Ekran.kaydirmaAyarla(0, 0);
-                oyunTahtasi.addVarlik(pos, new Koridor(x, y, koridor));
+                oyunTahtasi.addVarlik(pos, new Koridor(x, y, koridorSecili));
                 break;
 
             // Ozellikler
             case 'B': // Bomba Arttirma Ozelligi
                 KatmanliNesne layer = new KatmanliNesne(x, y,
-                        new Koridor(x, y, koridor),
-                        new SaglamZemin(x, y, kirilabilirDuvar));
+                        new Koridor(x, y, koridorSecili),
+                        new SaglamZemin(x, y, kirilabilirDuvarSecili));
 
                 if (!oyunTahtasi.ozellikKullanildiMi(x, y)) {
                     layer.addBeforeTop(new OzellikBomba(x, y, oyunTahtasi, Model.ozellik_bomba));
@@ -127,8 +192,8 @@ public class DosyaHaritalama extends Haritalama implements SabitDegiskenler {
                 break;
             case 'H': // Hiz Arttirma Ozelligi
                 layer = new KatmanliNesne(x, y,
-                        new Koridor(x, y, koridor),
-                        new SaglamZemin(x, y, kirilabilirDuvar));
+                        new Koridor(x, y, koridorSecili),
+                        new SaglamZemin(x, y, kirilabilirDuvarSecili));
 
                 if (!oyunTahtasi.ozellikKullanildiMi(x, y)) {
                     layer.addBeforeTop(new OzellikHiz(x, y, oyunTahtasi, Model.ozellik_hiz));
@@ -138,8 +203,8 @@ public class DosyaHaritalama extends Haritalama implements SabitDegiskenler {
                 break;
             case 'M': // Menzil Arttirma Ozelligi
                 layer = new KatmanliNesne(x, y,
-                        new Koridor(x, y, koridor),
-                        new SaglamZemin(x, y, kirilabilirDuvar));
+                        new Koridor(x, y, koridorSecili),
+                        new SaglamZemin(x, y, kirilabilirDuvarSecili));
 
                 if (!oyunTahtasi.ozellikKullanildiMi(x, y)) {
                     layer.addBeforeTop(new OzellikMenzil(x, y, oyunTahtasi, Model.ozellik_menzil));
@@ -149,8 +214,8 @@ public class DosyaHaritalama extends Haritalama implements SabitDegiskenler {
                 break;
             case 'K': // Kumanda Ozelligi
                 layer = new KatmanliNesne(x, y,
-                        new Koridor(x, y, koridor),
-                        new SaglamZemin(x, y, kirilabilirDuvar));
+                        new Koridor(x, y, koridorSecili),
+                        new SaglamZemin(x, y, kirilabilirDuvarSecili));
 
                 if (!oyunTahtasi.ozellikKullanildiMi(x, y)) {
                     layer.addBeforeTop(new OzellikKumanda(x, y, oyunTahtasi, Model.ozellik_kumanda));
@@ -160,8 +225,8 @@ public class DosyaHaritalama extends Haritalama implements SabitDegiskenler {
                 break;
             case 'A': // Atlama Ozelligi
                 layer = new KatmanliNesne(x, y,
-                        new Koridor(x, y, koridor),
-                        new SaglamZemin(x, y, kirilabilirDuvar));
+                        new Koridor(x, y, koridorSecili),
+                        new SaglamZemin(x, y, kirilabilirDuvarSecili));
 
                 if (!oyunTahtasi.ozellikKullanildiMi(x, y)) {
                     layer.addBeforeTop(new OzellikAtlama(x, y, oyunTahtasi, Model.ozellik_atlama));
@@ -174,18 +239,18 @@ public class DosyaHaritalama extends Haritalama implements SabitDegiskenler {
             case '1':
                 haritaMatrix[y][x] = 1;
                 oyunTahtasi.addKarakter(new Balon(Koordinat.hucredenPiksele(x), Koordinat.hucredenPiksele(y) + Oyun.KARE_BOYUT, oyunTahtasi));
-                oyunTahtasi.addVarlik(pos, new Koridor(x, y, koridor));
+                oyunTahtasi.addVarlik(pos, new Koridor(x, y, koridorSecili));
                 break;
             case '2':
                 haritaMatrix[y][x] = 1;
                 oyunTahtasi.addKarakter(new Sogan(Koordinat.hucredenPiksele(x), Koordinat.hucredenPiksele(y) + Oyun.KARE_BOYUT, oyunTahtasi));
-                oyunTahtasi.addVarlik(pos, new Koridor(x, y, koridor));
+                oyunTahtasi.addVarlik(pos, new Koridor(x, y, koridorSecili));
                 break;
 
             // Zemin
             default:
                 haritaMatrix[y][x] = 1;
-                oyunTahtasi.addVarlik(pos, new Koridor(x, y, koridor));
+                oyunTahtasi.addVarlik(pos, new Koridor(x, y, koridorSecili));
                 break;
         }
     }

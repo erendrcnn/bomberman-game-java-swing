@@ -202,6 +202,21 @@ public class Ekran implements SabitDegiskenler {
                 g.drawString("Turkuaz", Oyun.GENISLIK + 140, Oyun.YUKSEKLIK + 65);
                 break;
         }
+
+        switch (OyunTahtasi.seciliTema) {
+            case 1:
+                g.drawString("Standart", Oyun.GENISLIK + 140, Oyun.YUKSEKLIK + 160);
+                break;
+            case 2:
+                g.drawString("Uzay", Oyun.GENISLIK + 140, Oyun.YUKSEKLIK + 160);
+                break;
+            case 3:
+                g.drawString("Orman", Oyun.GENISLIK + 140, Oyun.YUKSEKLIK + 160);
+                break;
+            case 4:
+                g.drawString("Sahil", Oyun.GENISLIK + 140, Oyun.YUKSEKLIK + 160);
+                break;
+        }
     }
 
     public void yeniOyunCiz(Graphics g) {

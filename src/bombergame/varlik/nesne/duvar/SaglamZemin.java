@@ -1,5 +1,6 @@
 package bombergame.varlik.nesne.duvar;
 
+import bombergame.OyunTahtasi;
 import bombergame.harita.Koordinat;
 import bombergame.medya.Ekran;
 import bombergame.medya.Model;
@@ -22,7 +23,19 @@ public class SaglamZemin extends KirilganZemin {
         int y = Koordinat.hucredenPiksele(_y);
 
         if (_parcalandi) {
-            _model = movingSprite(kirilabilirDuvar_patla1, kirilabilirDuvar_patla2, kirilabilirDuvar_patla3);
+            switch (OyunTahtasi.seciliTema) {
+                case 2:
+                    _model = movingSprite(kirilabilirDuvar_patla12, kirilabilirDuvar_patla22, kirilabilirDuvar_patla32);
+                    break;
+                case 3:
+                    _model = movingSprite(kirilabilirDuvar_patla13, kirilabilirDuvar_patla23, kirilabilirDuvar_patla33);
+                    break;
+                case 4:
+                    _model = movingSprite(kirilabilirDuvar_patla14, kirilabilirDuvar_patla24, kirilabilirDuvar_patla34);
+                    break;
+                default:
+                    _model = movingSprite(kirilabilirDuvar_patla1, kirilabilirDuvar_patla2, kirilabilirDuvar_patla3);
+            }
             screen.altModelVeNesneyiCiz(x, y, this, _altTabaka);
         } else {
             screen.nesneyiCiz(x, y, this);

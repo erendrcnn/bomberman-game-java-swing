@@ -24,7 +24,7 @@ import java.util.*;
 
 public class OyunTahtasi implements Guncelleme {
 
-    private static final boolean DEMO_MODE = false;
+    private static final boolean DEMO_MODE = true;
     protected Haritalama _haritalama;
     protected Oyun _oyun;
     protected Klavye _girdi;
@@ -42,6 +42,7 @@ public class OyunTahtasi implements Guncelleme {
     private int seviye = Oyun.SEVIYE;
     private int can = Oyun.CAN;
     public static char seciliOzellik = 'A';
+    public static int seciliTema = 1;
     public static ArrayList<Character> ozellikListe = new ArrayList<>(Arrays.asList('A', 'K', 'M', 'H', 'B'));
 
     public OyunTahtasi(Oyun oyun, Klavye input, Ekran screen) {
