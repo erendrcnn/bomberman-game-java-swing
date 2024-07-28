@@ -48,11 +48,11 @@ public abstract class Karakter extends AnimasyonluNesne {
     }
 
     protected double getXMessage() {
-        return (_x * Oyun.SCALE) + (_model.UZUNLUK / 2 * Oyun.SCALE);
+        return (_x * Oyun.OLCEK) + (_model.UZUNLUK / 2 * Oyun.OLCEK);
     }
 
     protected double getYMessage() {
-        return (_y * Oyun.SCALE) - (_model.UZUNLUK / 2 * Oyun.SCALE);
+        return (_y * Oyun.OLCEK) - (_model.UZUNLUK / 2 * Oyun.OLCEK);
     }
 
 }

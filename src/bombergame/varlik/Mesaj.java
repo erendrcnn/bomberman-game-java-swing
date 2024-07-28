@@ -11,32 +11,32 @@ public class Mesaj extends Nesne {
     protected Color _renk;
     protected int _boyut;
 
-    public Mesaj(String msg, double x, double y, int sure, Color color, int boyut) {
+    public Mesaj(String msg, double x, double y, int sure, Color renk, int boyut) {
         _x = x;
         _y = y;
         _metin = msg;
         _sure = sure * 60; //seconds
-        _renk = color;
+        _renk = renk;
         _boyut = boyut;
     }
 
-    public int getDuration() {
+    public int getSure() {
         return _sure;
     }
 
-    public void setDuration(int _duration) {
+    public void setSure(int _duration) {
         this._sure = _duration;
     }
 
-    public String getMessage() {
+    public String getMesaj() {
         return _metin;
     }
 
-    public Color getColor() {
+    public Color getRenk() {
         return _renk;
     }
 
-    public int getSize() {
+    public int getBoyut() {
         return _boyut;
     }
 

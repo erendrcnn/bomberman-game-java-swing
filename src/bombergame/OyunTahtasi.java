@@ -37,10 +37,10 @@ public class OyunTahtasi implements Guncelleme {
 
     private int _gosterilenEkran = -1; //1:endgame, 2:changelevel, 3:paused
 
-    private int _zaman = Oyun.TIME;
-    private int puanlar = Oyun.POINTS;
-    private int seviye = Oyun.SEVIYE;
-    private int can = Oyun.CAN;
+    private int _zaman = Oyun.SURE_SABIT;
+    private int puanlar = Oyun.PUAN_SABIT;
+    private int seviye = Oyun.SEVITE_SABIT;
+    private int can = Oyun.CAN_SABIT;
     public static char seciliOzellik = 'A';
     public static int seciliTema = 1;
     public static ArrayList<Character> ozellikListe = new ArrayList<>(Arrays.asList('A', 'K', 'M', 'H', 'B'));
@@ -109,9 +109,9 @@ public class OyunTahtasi implements Guncelleme {
 
     @SuppressWarnings("static-access")
     private void degerleriSifirla() {
-        puanlar = Oyun.POINTS;
-        seviye = Oyun.SEVIYE;
-        can = Oyun.CAN;
+        puanlar = Oyun.PUAN_SABIT;
+        seviye = Oyun.SEVITE_SABIT;
+        can = Oyun.CAN_SABIT;
         Oyuncu._ozellikler.clear();
 
         _oyun.oyuncuHiz = 0.7;
@@ -131,7 +131,7 @@ public class OyunTahtasi implements Guncelleme {
             }
         }
 
-        _zaman = Oyun.TIME;
+        _zaman = Oyun.SURE_SABIT;
         _gosterilenEkran = 2;
         _oyun.sifirlaEkranYenileme();
         _oyun.duraklat();
@@ -518,9 +518,9 @@ public class OyunTahtasi implements Guncelleme {
 
     public void mesajCiz(Graphics g) {
         for (Mesaj message : _mesajlar) {
-            g.setFont(new Font("Arial", Font.PLAIN, message.getSize()));
-            g.setColor(message.getColor());
-            g.drawString(message.getMessage(), (int) message.getX() - Ekran.xKaydirma * Oyun.SCALE, (int) message.getY());
+            g.setFont(new Font("Arial", Font.PLAIN, message.getBoyut()));
+            g.setColor(message.getRenk());
+            g.drawString(message.getMesaj(), (int) message.getX() - Ekran.xKaydirma * Oyun.OLCEK, (int) message.getY());
         }
     }
 
@@ -566,11 +566,11 @@ public class OyunTahtasi implements Guncelleme {
 
     protected void mesajGuncelle() {
         if (_oyun.oyunDurduMu()) return;
-        _mesajlar.removeIf(message -> message.getDuration() <= 0);
+        _mesajlar.removeIf(message -> message.getSure() <= 0);
 
         try {
             for (Mesaj message : _mesajlar) {
-                message.setDuration(message.getDuration() - 1);
+                message.setSure(message.getSure() - 1);
             }
         } catch (ConcurrentModificationException | NoSuchElementException e) {
         }

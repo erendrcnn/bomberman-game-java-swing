@@ -14,7 +14,8 @@ public interface SabitDegiskenler {
 
     String kayitDosyasi = "res/veri/kayit.txt";
     String skorDosyasi = "res/veri/MaxSkor.txt";
-    String fontDosyasi = "res/font/VBRUSHTB.ttf";
+    String fontDosyasi1 = "res/font/OYUNFONT1.otf"; // JOYSTICK
+    String fontDosyasi2 = "res/font/OYUNFONT2.ttf"; // VBBRUSHTB Bold
     String ayarlarPanel = "res/model/ayarlar-tablo.png";
     String arkaPlanPanel = "res/model/anamenu.png";
     String yeniOyunPanel = "res/model/yeni-oyun.png";

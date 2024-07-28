@@ -16,9 +16,9 @@ import java.io.*;
 public class Oyun extends Canvas implements MouseListener, MouseMotionListener, SabitDegiskenler {
 
     public static final int KARE_BOYUT = 16;
-    public static final int GENISLIK = KARE_BOYUT * (33 / 2); // Adjusted window width
+    public static final int GENISLIK = KARE_BOYUT * (33 / 2);
     public static final int YUKSEKLIK = 13 * KARE_BOYUT;
-    public static final int SCALE = 3;
+    public static final int OLCEK = 3;
     public static final String BASLIK = "Bomberman Game - Java Swing (Eren Durucan)";
     private static final int BOMBACEPHANE = 1;
     private static final int BOMBAALAN = 1;
@@ -26,10 +26,10 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
     private static final boolean ATLAMA = false;
     private static final double OYUNCUHIZ = 0.7;
     private static final int EKRANYENILEME = 2;
-    public static final int TIME = 200;
-    public static final int POINTS = 0;
-    public static final int SEVIYE = 1;
-    public static final int CAN = 2;
+    public static final int SURE_SABIT = 200;
+    public static final int PUAN_SABIT = 0;
+    public static final int SEVITE_SABIT = 1;
+    public static final int CAN_SABIT = 2;
     public static int _maxPuan = 0;
 
     protected static int bombaCephane = BOMBACEPHANE;
@@ -265,9 +265,9 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
     }
 
     private void handleMouseClick(MouseEvent e) {
-        Rectangle playButton = new Rectangle(GENISLIK + 50, YUKSEKLIK + 130, 150, 50);
-        Rectangle optionButton = new Rectangle(GENISLIK + 50, YUKSEKLIK + 210, 150, 50);
-        Rectangle exitSettingButton = new Rectangle(GENISLIK + 300, YUKSEKLIK - 60, 50, 50);
+        Rectangle oynaButon = new Rectangle(GENISLIK + 40, YUKSEKLIK + 140, 170, 60);
+        Rectangle ayarlarButon = new Rectangle(GENISLIK + 40, YUKSEKLIK + 210, 170, 60);
+        Rectangle ayarlarKapatButon = new Rectangle(GENISLIK + 300, YUKSEKLIK - 60, 50, 50);
         Rectangle ozellikDegistirSagButon = new Rectangle(GENISLIK + 270, YUKSEKLIK + 40, 30, 30);
         Rectangle ozellikDegistirSolButon = new Rectangle(GENISLIK + 70, YUKSEKLIK + 40, 30, 30);
         Rectangle temaDegistirSagButon = new Rectangle(GENISLIK + 270, YUKSEKLIK + 140, 30, 30);
@@ -277,17 +277,17 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
         Rectangle yeniOyunPencereKapatButon = new Rectangle(GENISLIK - 10, YUKSEKLIK + 100, 100, 40);
         Rectangle yeniOyunButon = new Rectangle(GENISLIK + 50, YUKSEKLIK + 170, 150, 50);
 
-        if (playButton.contains(e.getX(), e.getY()) && _menu && !ayarlarMenusu) {
+        if (oynaButon.contains(e.getX(), e.getY()) && _menu && !ayarlarMenusu) {
             _menu = false;
             _oyunDevam = true;
         }
 
-        if (optionButton.contains(e.getX(), e.getY()) && _menu && !ayarlarMenusu) {
+        if (ayarlarButon.contains(e.getX(), e.getY()) && _menu && !ayarlarMenusu) {
             ayarlarMenusu = true;
             getOyunTahtasi().setAnlikEkran(5);
         }
 
-        if (exitSettingButton.contains(e.getX(), e.getY()) && (_oyunDurdu || ayarlarMenusu)) {
+        if (ayarlarKapatButon.contains(e.getX(), e.getY()) && (_oyunDurdu || ayarlarMenusu)) {
             ayarlarMenusu = false;
             if (_menu) {
                 getOyunTahtasi().setAnlikEkran(4);
@@ -382,16 +382,17 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
     }
 
     private void handleMouseMove(MouseEvent e) {
-        Rectangle playButton = new Rectangle(GENISLIK + 35, YUKSEKLIK + 140, 165, 60);
-        Rectangle optionButton = new Rectangle(GENISLIK + 35, YUKSEKLIK + 210, 165, 60);
-        Rectangle exitSettingButton = new Rectangle(GENISLIK + 300, YUKSEKLIK - 60, 50, 50);
-        Rectangle changeMapButton = new Rectangle(GENISLIK + 270, YUKSEKLIK + 40, 30, 30);
-        Rectangle changeMapButton_1 = new Rectangle(GENISLIK + 70, YUKSEKLIK + 40, 30, 30);
-        Rectangle okButton = new Rectangle(GENISLIK + 90, YUKSEKLIK + 240, 100, 50);
-        Rectangle codeButton = new Rectangle(GENISLIK - 60, YUKSEKLIK + 140, 120, 50);
+        Rectangle oynaButon = new Rectangle(GENISLIK + 40, YUKSEKLIK + 140, 170, 60);
+        Rectangle ayarlarButon = new Rectangle(GENISLIK + 40, YUKSEKLIK + 210, 170, 60);
+        Rectangle ayarlarKapatButon = new Rectangle(GENISLIK + 300, YUKSEKLIK - 60, 50, 50);
+        Rectangle ozellikDegistirSagButon = new Rectangle(GENISLIK + 270, YUKSEKLIK + 40, 30, 30);
+        Rectangle ozellikDegistirSolButon = new Rectangle(GENISLIK + 70, YUKSEKLIK + 40, 30, 30);
+        Rectangle temaDegistirSagButon = new Rectangle(GENISLIK + 270, YUKSEKLIK + 140, 30, 30);
+        Rectangle temaDegistirSolButon = new Rectangle(GENISLIK + 70, YUKSEKLIK + 140, 30, 30);
+        Rectangle tamamButon = new Rectangle(GENISLIK + 90, YUKSEKLIK + 220, 100, 50);
 
         if (_menu && !ayarlarMenusu) {
-            if (playButton.contains(e.getX(), e.getY()) || optionButton.contains(e.getX(), e.getY())) {
+            if (oynaButon.contains(e.getX(), e.getY()) || ayarlarButon.contains(e.getX(), e.getY())) {
                 setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             } else {
                 setCursor(Cursor.getDefaultCursor());
@@ -399,11 +400,12 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
         }
 
         if (ayarlarMenusu) {
-            if (exitSettingButton.contains(e.getX(), e.getY())
-                    || changeMapButton.contains(e.getX(), e.getY())
-                    || changeMapButton_1.contains(e.getX(), e.getY())
-                    || codeButton.contains(e.getX(), e.getY())
-                    || okButton.contains(e.getX(), e.getY())) {
+            if (ayarlarKapatButon.contains(e.getX(), e.getY())
+                    || ozellikDegistirSagButon.contains(e.getX(), e.getY())
+                    || ozellikDegistirSolButon.contains(e.getX(), e.getY())
+                    || temaDegistirSagButon.contains(e.getX(), e.getY())
+                    || temaDegistirSolButon.contains(e.getX(), e.getY())
+                    || tamamButon.contains(e.getX(), e.getY())) {
                 setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             } else {
                 setCursor(Cursor.getDefaultCursor());
@@ -411,8 +413,8 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
         }
 
         if (oyunBitti) {
-            Rectangle replayButton = new Rectangle(GENISLIK + 50, YUKSEKLIK + 170, 150, 50);
-            if (replayButton.contains(e.getX(), e.getY())) {
+            Rectangle yeniOyunButon = new Rectangle(GENISLIK + 50, YUKSEKLIK + 170, 150, 50);
+            if (yeniOyunButon.contains(e.getX(), e.getY())) {
                 setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             } else {
                 setCursor(Cursor.getDefaultCursor());
@@ -420,9 +422,9 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
         }
 
         if (oyunYenilendi) {
-            Rectangle confirmNewGame = new Rectangle(GENISLIK + 150, YUKSEKLIK + 100, 100, 40);
-            Rectangle exitNewGame = new Rectangle(GENISLIK - 10, YUKSEKLIK + 100, 100, 40);
-            if (confirmNewGame.contains(e.getX(), e.getY()) || exitNewGame.contains(e.getX(), e.getY())) {
+            Rectangle yeniOyunBaslatButon = new Rectangle(GENISLIK + 150, YUKSEKLIK + 100, 100, 40);
+            Rectangle yeniOyunPencereKapatButon = new Rectangle(GENISLIK - 10, YUKSEKLIK + 100, 100, 40);
+            if (yeniOyunBaslatButon.contains(e.getX(), e.getY()) || yeniOyunPencereKapatButon.contains(e.getX(), e.getY())) {
                 setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             } else {
                 setCursor(Cursor.getDefaultCursor());

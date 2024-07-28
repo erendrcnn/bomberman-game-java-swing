@@ -17,7 +17,8 @@ public class Ekran implements SabitDegiskenler {
     protected int _genislik, _yukseklik;
     public int[] _pikseller;
     private final int _transparanRenk = 0xffff00ff; //pink with alpha channel (ff in the begining)
-    private Font yaziTipi;
+    private Font yaziTipi1;
+    private Font yaziTipi2;
 
     private BufferedImage ayarlar = null;
     private Image ayarlarSabitleme = null;
@@ -49,9 +50,9 @@ public class Ekran implements SabitDegiskenler {
         }
 
         if (arkaPlan != null)
-            arkaPlanSabitleme = arkaPlan.getScaledInstance(Oyun.GENISLIK * Oyun.SCALE, Oyun.YUKSEKLIK * Oyun.SCALE, Image.SCALE_DEFAULT);
+            arkaPlanSabitleme = arkaPlan.getScaledInstance(Oyun.GENISLIK * Oyun.OLCEK, Oyun.YUKSEKLIK * Oyun.OLCEK, Image.SCALE_DEFAULT);
         else
-            arkaPlan = new BufferedImage(Oyun.GENISLIK * Oyun.SCALE, Oyun.YUKSEKLIK * Oyun.SCALE, BufferedImage.TYPE_INT_RGB);
+            arkaPlan = new BufferedImage(Oyun.GENISLIK * Oyun.OLCEK, Oyun.YUKSEKLIK * Oyun.OLCEK, BufferedImage.TYPE_INT_RGB);
 
         try {
             yeniOyunGorseli = ImageIO.read(new File(yeniOyunPanel));
@@ -122,16 +123,19 @@ public class Ekran implements SabitDegiskenler {
 
     /*
     |--------------------------------------------------------------------------
-    | Game Screens
+    | Oyun Ekrani Cizimleri
     |--------------------------------------------------------------------------
      */
 
     public void yaziTipiYukle() {
         try {
-            File fontFile = new File(fontDosyasi);
-            yaziTipi = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.PLAIN, 60);
+            File fontFile1 = new File(fontDosyasi1);
+            File fontFile2 = new File(fontDosyasi2);
+            yaziTipi1 = Font.createFont(Font.TRUETYPE_FONT, fontFile1).deriveFont(Font.PLAIN, 60);
+            yaziTipi2 = Font.createFont(Font.TRUETYPE_FONT, fontFile2).deriveFont(Font.PLAIN, 60);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(yaziTipi);
+            ge.registerFont(yaziTipi1);
+            ge.registerFont(yaziTipi2);
         } catch (IOException | FontFormatException e) {
             //Handle exception
         }
@@ -144,29 +148,29 @@ public class Ekran implements SabitDegiskenler {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        int targetWidth = image.getWidth() * Oyun.SCALE / 4;
-        int targetHeight = image.getHeight() * Oyun.SCALE / 4;
+        int targetWidth = image.getWidth() * Oyun.OLCEK / 4;
+        int targetHeight = image.getHeight() * Oyun.OLCEK / 4;
         Image scoreTable = image.getScaledInstance(targetWidth, targetHeight, Image.SCALE_DEFAULT);
-        g.setFont(yaziTipi.deriveFont(Font.PLAIN, 12 * Oyun.SCALE));
+        g.setFont(yaziTipi2.deriveFont(Font.PLAIN, 12 * Oyun.OLCEK));
         g.setColor(Color.white);
         ortaGorselCiz(scoreTable, targetWidth, targetHeight, getGercekGenislik(), getGercekYukseklik(), g);
-        ortaMetinCiz("Oyun Bitti", getGercekGenislik(), getGercekYukseklik() - targetHeight + 140 / Oyun.SCALE, g);
-        ortaMetinCiz("Skorun: " + points, getGercekGenislik(), getGercekYukseklik() - targetHeight + 700 / Oyun.SCALE, g);
-        ortaMetinCiz("Rekor: " + highscore, getGercekGenislik(), getGercekYukseklik() - targetHeight + 1000 / Oyun.SCALE, g);
-        ortaMetinCiz("Tekrar Dene", getGercekGenislik() + 10, getGercekYukseklik() - targetHeight + 1524 / Oyun.SCALE, g);
+        ortaMetinCiz("Oyun Bitti", getGercekGenislik(), getGercekYukseklik() - targetHeight + 140 / Oyun.OLCEK, g);
+        ortaMetinCiz("Skorun: " + points, getGercekGenislik(), getGercekYukseklik() - targetHeight + 700 / Oyun.OLCEK, g);
+        ortaMetinCiz("Rekor: " + highscore, getGercekGenislik(), getGercekYukseklik() - targetHeight + 1000 / Oyun.OLCEK, g);
+        ortaMetinCiz("Tekrar Dene", getGercekGenislik() + 10, getGercekYukseklik() - targetHeight + 1524 / Oyun.OLCEK, g);
     }
 
     public void oyunYuklemeCiz(Graphics g) {
         g.setColor(Color.black);
         g.fillRect(0, 0, getGercekGenislik(), getGercekYukseklik());
 
-        g.setFont(yaziTipi);
+        g.setFont(yaziTipi2);
         g.setColor(Color.white);
         ortaMetinCiz("YUKLENIYOR...", getGercekGenislik(), getGercekYukseklik(), g);
     }
 
     public void oyunDuraklamaCiz(Graphics g) {
-        g.setFont(yaziTipi);
+        g.setFont(yaziTipi2);
         g.setColor(Color.white);
         ortaMetinCiz("DURAKLATILDI", getGercekGenislik(), getGercekYukseklik(), g);
 
@@ -177,51 +181,51 @@ public class Ekran implements SabitDegiskenler {
     }
 
     public void ayarlarCiz(Graphics g) {
-        g.setFont(yaziTipi.deriveFont(Font.PLAIN, 12 * Oyun.SCALE));
+        g.setFont(yaziTipi1.deriveFont(Font.PLAIN, 7 * Oyun.OLCEK));
         g.setColor(Color.white);
 
-        int hedefGenislik = ayarlar.getWidth() * Oyun.SCALE / 4;
-        int hedefYukseklik = ayarlar.getHeight() * Oyun.SCALE / 4;
+        int hedefGenislik = ayarlar.getWidth() * Oyun.OLCEK / 4;
+        int hedefYukseklik = ayarlar.getHeight() * Oyun.OLCEK / 4;
         ayarlarSabitleme = ayarlar.getScaledInstance(hedefGenislik, hedefYukseklik, Image.SCALE_DEFAULT);
         ortaGorselCiz(ayarlarSabitleme, hedefGenislik, hedefYukseklik, getGercekGenislik(), getGercekYukseklik(), g);
 
         switch (OyunTahtasi.seciliOzellik) {
             case 'B': // OzellikBomba
-                g.drawString("Sari", Oyun.GENISLIK + 140, Oyun.YUKSEKLIK + 65);
+                g.drawString("Sari", Oyun.GENISLIK + 155, Oyun.YUKSEKLIK + 65);
                 break;
             case 'M': // OzellikMenzil
-                g.drawString("Yesil", Oyun.GENISLIK + 140, Oyun.YUKSEKLIK + 65);
+                g.drawString("Yesil", Oyun.GENISLIK + 145, Oyun.YUKSEKLIK + 65);
                 break;
             case 'A': // OzellikAtlama
-                g.drawString("Mavi", Oyun.GENISLIK + 140, Oyun.YUKSEKLIK + 65);
+                g.drawString("Mavi", Oyun.GENISLIK + 155, Oyun.YUKSEKLIK + 65);
                 break;
             case 'H': // OzellikHiz
-                g.drawString("Turuncu", Oyun.GENISLIK + 140, Oyun.YUKSEKLIK + 65);
+                g.drawString("Turuncu", Oyun.GENISLIK + 125, Oyun.YUKSEKLIK + 65);
                 break;
             case 'K': // OzellikKumanda
-                g.drawString("Turkuaz", Oyun.GENISLIK + 140, Oyun.YUKSEKLIK + 65);
+                g.drawString("Turkuaz", Oyun.GENISLIK + 125, Oyun.YUKSEKLIK + 65);
                 break;
         }
 
         switch (OyunTahtasi.seciliTema) {
             case 1:
-                g.drawString("Standart", Oyun.GENISLIK + 140, Oyun.YUKSEKLIK + 160);
+                g.drawString("Standart", Oyun.GENISLIK + 125, Oyun.YUKSEKLIK + 160);
                 break;
             case 2:
-                g.drawString("Uzay", Oyun.GENISLIK + 140, Oyun.YUKSEKLIK + 160);
+                g.drawString("Uzay", Oyun.GENISLIK + 160, Oyun.YUKSEKLIK + 160);
                 break;
             case 3:
-                g.drawString("Orman", Oyun.GENISLIK + 140, Oyun.YUKSEKLIK + 160);
+                g.drawString("Orman", Oyun.GENISLIK + 150, Oyun.YUKSEKLIK + 160);
                 break;
             case 4:
-                g.drawString("Çöl", Oyun.GENISLIK + 140, Oyun.YUKSEKLIK + 160);
+                g.drawString("Çöl", Oyun.GENISLIK + 165, Oyun.YUKSEKLIK + 160);
                 break;
         }
     }
 
     public void yeniOyunCiz(Graphics g) {
-        int targetWidth = yeniOyunGorseli.getWidth() * Oyun.SCALE / 4;
-        int targetHeight = yeniOyunGorseli.getHeight() * Oyun.SCALE / 4;
+        int targetWidth = yeniOyunGorseli.getWidth() * Oyun.OLCEK / 4;
+        int targetHeight = yeniOyunGorseli.getHeight() * Oyun.OLCEK / 4;
         yeniOyunGorseliSabitleme = yeniOyunGorseli.getScaledInstance(targetWidth, targetHeight, Image.SCALE_DEFAULT);
         ortaGorselCiz(yeniOyunGorseliSabitleme, targetWidth, targetHeight, getGercekGenislik(), getGercekYukseklik(), g);
     }
@@ -249,10 +253,10 @@ public class Ekran implements SabitDegiskenler {
     }
 
     public int getGercekGenislik() {
-        return _genislik * Oyun.SCALE;
+        return _genislik * Oyun.OLCEK;
     }
 
     public int getGercekYukseklik() {
-        return _yukseklik * Oyun.SCALE;
+        return _yukseklik * Oyun.OLCEK;
     }
 }

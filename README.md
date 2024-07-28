@@ -10,6 +10,12 @@ The Bomberman game is developed using the following classes and components:
 
 ![Simple Diagram](DiyagramBasit.png)
 
+### Statistics
+
+- Total Lines: 4353
+- Source Code Lines: 3443 (79%)
+- Comment Lines: 176 (4%)
+- Blank Lines: 734 (17%)
 
 ### Mapping
 - **FileMapping**: A class for reading and processing map files.

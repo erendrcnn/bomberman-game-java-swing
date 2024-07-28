@@ -11,7 +11,7 @@ public class OyunPanel extends JPanel {
 
     public OyunPanel(Pencere pencere) {
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(Oyun.GENISLIK * Oyun.SCALE, Oyun.YUKSEKLIK * Oyun.SCALE));
+        setPreferredSize(new Dimension(Oyun.GENISLIK * Oyun.OLCEK, Oyun.YUKSEKLIK * Oyun.OLCEK));
 
         _oyun = new Oyun(pencere);
         add(_oyun);
@@ -22,7 +22,7 @@ public class OyunPanel extends JPanel {
     }
 
     public void boyutDegistir() {
-        setPreferredSize(new Dimension(Oyun.GENISLIK * Oyun.SCALE, Oyun.YUKSEKLIK * Oyun.SCALE));
+        setPreferredSize(new Dimension(Oyun.GENISLIK * Oyun.OLCEK, Oyun.YUKSEKLIK * Oyun.OLCEK));
         revalidate();
         repaint();
     }
