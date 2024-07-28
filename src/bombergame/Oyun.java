@@ -3,6 +3,9 @@ package bombergame;
 import bombergame.gui.Klavye;
 import bombergame.gui.Pencere;
 import bombergame.medya.Ekran;
+import bombergame.varlik.karakter.Karakter;
+import bombergame.varlik.karakter.Oyuncu;
+import bombergame.varlik.karakter.dusman.Canavar;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -150,9 +153,27 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
                 if (oyunDurduMu()) {
                     oyunKayitOku();
                     _oyunTahtasi.oyunDevam();
+
                 } else {
                     _oyunTahtasi.oyunDuraklat();
                     oyunKayit();
+                }
+
+                for (Karakter karakter : _oyunTahtasi._karakterler) {
+                    if (karakter instanceof Canavar canavar) {
+                        if (_oyunDurdu) {
+                            canavar.duraklat();
+                        } else {
+                            canavar.devamEt();
+                        }
+                    }
+                    if (karakter instanceof Oyuncu oyuncu) {
+                        if (_oyunDurdu) {
+                            oyuncu.duraklat();
+                        } else {
+                            oyuncu.devamEt();
+                        }
+                    }
                 }
 
                 try {

@@ -24,12 +24,13 @@ public abstract class Canavar extends Karakter implements Runnable {
     protected final double kalanSayi; // bölümün kalan kısmı
     protected double adimSayi;
 
-    protected int finalAnaimasyon = 30;
+    protected int finalAnimasyon = 30;
     protected Model olumModeli;
 
     private Thread dusmanThread;
+    private volatile boolean duraklatildi = false;
 
-    public Canavar(int x, int y, OyunTahtasi oyunTahtasi, Model dead, double hizSabiti, int puanDegeri) {
+    public Canavar(int x, int y, OyunTahtasi oyunTahtasi, Model olumModeli, double hizSabiti, int puanDegeri) {
         super(x, y, oyunTahtasi);
         this.puanDegeri = puanDegeri;
         this.hizSabiti = hizSabiti;
@@ -39,7 +40,7 @@ public abstract class Canavar extends Karakter implements Runnable {
         adimSayi = MAX_ADIM;
 
         _gecenZaman = 20;
-        olumModeli = dead;
+        this.olumModeli = olumModeli;
 
         dusmanThread = new Thread(this);
         dusmanThread.start();
@@ -48,6 +49,16 @@ public abstract class Canavar extends Karakter implements Runnable {
     @Override
     public void run() {
         while (_canli) {
+            synchronized (this) {
+                while (duraklatildi) {
+                    try {
+                        wait();
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        return;
+                    }
+                }
+            }
             this.guncelle();
             try {
                 Thread.sleep(50);
@@ -58,7 +69,20 @@ public abstract class Canavar extends Karakter implements Runnable {
         }
     }
 
-    public synchronized void stop() {
+    public synchronized void duraklat() {
+        duraklatildi = true;
+    }
+
+    public synchronized void devamEt() {
+        duraklatildi = false;
+        notify();
+    }
+
+    public boolean duraklatildiMi() {
+        return duraklatildi;
+    }
+
+    public synchronized void sonlandir() {
         _canli = false;
         if (dusmanThread != null) {
             dusmanThread.interrupt();
@@ -234,8 +258,8 @@ public abstract class Canavar extends Karakter implements Runnable {
         if (_gecenZaman > 0) {
             _gecenZaman--;
         } else {
-            if (finalAnaimasyon > 0) {
-                --finalAnaimasyon;
+            if (finalAnimasyon > 0) {
+                --finalAnimasyon;
             } else {
                 kaldir();
             }

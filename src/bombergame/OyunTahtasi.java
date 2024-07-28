@@ -125,9 +125,9 @@ public class OyunTahtasi implements Guncelleme {
         // Tüm karakter ve thread'leri durdur
         for (Karakter karakter : _karakterler) {
             if (karakter instanceof Oyuncu) {
-                ((Oyuncu) karakter).stop();
+                ((Oyuncu) karakter).sonlandir();
             } else if (karakter instanceof Canavar) {
-                ((Canavar) karakter).stop();
+                ((Canavar) karakter).sonlandir();
             }
         }
 

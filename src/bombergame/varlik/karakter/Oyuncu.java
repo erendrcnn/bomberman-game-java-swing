@@ -26,6 +26,7 @@ public class Oyuncu extends Karakter implements Runnable {
     public static List<Ozellik> _ozellikler = new ArrayList<>();
 
     private Thread oyuncuThread;
+    private volatile boolean duraklatildi = false;
 
     public Oyuncu(int x, int y, OyunTahtasi oyunTahtasi) {
         super(x, y, oyunTahtasi);
@@ -39,6 +40,16 @@ public class Oyuncu extends Karakter implements Runnable {
     @Override
     public void run() {
         while (_canli) {
+            synchronized (this) {
+                while (duraklatildi) {
+                    try {
+                        wait();
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        return;
+                    }
+                }
+            }
             this.guncelle();
             try {
                 Thread.sleep(50);
@@ -49,7 +60,20 @@ public class Oyuncu extends Karakter implements Runnable {
         }
     }
 
-    public synchronized void stop() {
+    public synchronized void duraklat() {
+        duraklatildi = true;
+    }
+
+    public synchronized void devamEt() {
+        duraklatildi = false;
+        notify();
+    }
+
+    public boolean duraklatildiMi() {
+        return duraklatildi;
+    }
+
+    public synchronized void sonlandir() {
         _canli = false;
         if (oyuncuThread != null) {
             oyuncuThread.interrupt();
