@@ -11,7 +11,7 @@ public class KirilganZemin extends Zemin {
     private int _animasyon = 0;
     protected boolean _parcalandi = false;
     protected int _kaybolmaSuresi = 20;
-    protected Model _altTabaka = koridor;           // Varsayılan
+    protected Model _altTabaka = koridor;           // Varsayilan alt tabaka = Yurume Alani
 
     public KirilganZemin(int x, int y, Model model) {
         super(x, y, model);
@@ -23,7 +23,7 @@ public class KirilganZemin extends Zemin {
             if (_animasyon < MAX_ANIMASYON) {
                 _animasyon++;
             } else {
-                _animasyon = 0; // Animasyonu sıfırla
+                _animasyon = 0; // Animasyonu sifirla
             }
             if (_kaybolmaSuresi > 0) {
                 _kaybolmaSuresi--;
@@ -45,11 +45,11 @@ public class KirilganZemin extends Zemin {
         return false;
     }
 
-    public void addBelowSprite(Model model) {
+    public void altTabakayaEkle(Model model) {
         _altTabaka = model;
     }
 
-    protected Model movingSprite(Model normal, Model x1, Model x2) {
+    protected Model hareketliModel(Model normal, Model x1, Model x2) {
         int calc = _animasyon % 30;
 
         if (calc < 10) {

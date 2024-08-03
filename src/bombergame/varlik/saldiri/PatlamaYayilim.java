@@ -8,14 +8,11 @@ import bombergame.varlik.karakter.Karakter;
 public class PatlamaYayilim extends Nesne {
 
     protected OyunTahtasi _oyunTahtasi;
-    protected int _yon;
+    private int _yon;
     private int _alan;
-    protected int xMerkez, yMerkez;
     protected Patlama[] _alevler;
 
     public PatlamaYayilim(int x, int y, int direction, int alan, OyunTahtasi oyunTahtasi) {
-        xMerkez = x;
-        yMerkez = y;
         _x = x;
         _y = y;
         _yon = direction;
@@ -53,10 +50,10 @@ public class PatlamaYayilim extends Nesne {
     }
 
     private int kisitliAlanHesapla() {
-        int radius = 0;
+        int yayilanAlan = 0;
         int x = (int) _x;
         int y = (int) _y;
-        while (radius < _alan) {
+        while (yayilanAlan < _alan) {
             if (_yon == 0) y--;
             if (_yon == 1) x++;
             if (_yon == 2) y++;
@@ -64,14 +61,14 @@ public class PatlamaYayilim extends Nesne {
 
             Nesne a = _oyunTahtasi.getVarlik(x, y, null);
 
-            if (a instanceof Karakter) ++radius;    // Patlama karakter ile karsilasirsa devam eder
+            if (a instanceof Karakter) ++yayilanAlan;    // Patlama karakter ile karsilasirsa devam eder
 
-            if (a.kesisme(this) == false)       // Patlama bir nesne ile karsilasirsa durur
+            if (a.kesisme(this) == false)        // Patlama bir nesne ile karsilasirsa durur
                 break;
 
-            ++radius;
+            ++yayilanAlan;
         }
-        return radius;
+        return yayilanAlan;
     }
 
     public Patlama patlamaKonum(int x, int y) {

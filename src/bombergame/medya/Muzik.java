@@ -9,13 +9,13 @@ public class Muzik {
     private boolean kapali = false;
     private String dosyaYolu;
 
-    public Muzik(String soundFile) {
-        dosyaYolu = soundFile;
-        File f = new File("./" + soundFile);
-        AudioInputStream audioIn = null;
+    public Muzik(String sesDosyasi) {
+        dosyaYolu = sesDosyasi;
+        File f = new File("./" + sesDosyasi);
+        AudioInputStream sesGirdi = null;
 
         try {
-            audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());
+            sesGirdi = AudioSystem.getAudioInputStream(f.toURI().toURL());
         } catch (IOException | UnsupportedAudioFileException e) {
             e.printStackTrace();
         }
@@ -27,7 +27,7 @@ public class Muzik {
         }
 
         try {
-            this.ses.open(audioIn);
+            this.ses.open(sesGirdi);
         } catch (IOException | LineUnavailableException e) {
             e.printStackTrace();
         }
@@ -36,10 +36,10 @@ public class Muzik {
     public void muzikCal(int _loop) {
         if (!this.kapali) {
             File f = new File("./" + dosyaYolu);
-            AudioInputStream audioIn = null;
+            AudioInputStream sesGirdi = null;
 
             try {
-                audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());
+                sesGirdi = AudioSystem.getAudioInputStream(f.toURI().toURL());
             } catch (IOException | UnsupportedAudioFileException e) {
                 e.printStackTrace();
             }
@@ -51,7 +51,7 @@ public class Muzik {
             }
 
             try {
-                this.ses.open(audioIn);
+                this.ses.open(sesGirdi);
             } catch (IOException | LineUnavailableException e) {
                 e.printStackTrace();
             }

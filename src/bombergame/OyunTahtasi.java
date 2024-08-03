@@ -24,27 +24,43 @@ import java.util.*;
 
 public class OyunTahtasi implements Guncelleme {
 
+    /*
+     >> Geliştirici Modu
+     */
     private static final boolean DEMO_MODE = false;
+
+    // Farkli Siniflarin Kullandigi Sabitler
     protected Haritalama _haritalama;
     protected Oyun _oyun;
     protected Klavye _girdi;
     protected Ekran _ekran;
 
-    public Nesne[] _varliklar;
-    public List<Karakter> _karakterler = new ArrayList<>();
+    // Oyun Nesneleri
+    protected Nesne[] _varliklar;
+    protected List<Karakter> _karakterler = new ArrayList<>();
     protected List<Bomba> _bombalar = new ArrayList<>();
-    private List<Mesaj> _mesajlar = new ArrayList<>();
+    protected List<Mesaj> _mesajlar = new ArrayList<>();
 
-    private int _gosterilenEkran = -1; //1:endgame, 2:changelevel, 3:paused
+    /*
+    >> EKRAN GOSTERIMI
+        1: Oyun Bitti
+        2: Oyun Yukleniyor
+        3: Oyun Duraklatildi
+        4: Menu
+        5: Ayarlar
+     */
+    private int _gosterilenEkran = -1;
 
+    // Oyun Sabitleri ve Degiskenleri
     private int _zaman = Oyun.SURE_SABIT;
     private int puanlar = Oyun.PUAN_SABIT;
     private int seviye = Oyun.SEVITE_SABIT;
     private int can = Oyun.CAN_SABIT;
-    public static char seciliOzellik = 'A';
-    public static int seciliTema = 1;
-    public static ArrayList<Character> ozellikListe = new ArrayList<>(Arrays.asList('A', 'K', 'M', 'H', 'B'));
+    private static char seciliOzellik = 'A';
+    private static int seciliTema = 1;
+    private static ArrayList<Character> ozellikListe = new ArrayList<>(Arrays.asList('A', 'K', 'M', 'H', 'B'));
 
+    // Oyun Tahtasi Olusturucu
     public OyunTahtasi(Oyun oyun, Klavye input, Ekran screen) {
         _oyun = oyun;
         _girdi = input;
@@ -53,16 +69,8 @@ public class OyunTahtasi implements Guncelleme {
         _gosterilenEkran = 4;
     }
 
-    public void bombaTetikle() {
-        for (Bomba b : _bombalar) {
-            b.patlat();
-        }
-    }
-
     /*
-    |--------------------------------------------------------------------------
-    | Guncelleme
-    |--------------------------------------------------------------------------
+    >> GUNCELLEMELER
      */
     @Override
     public void guncelle() {
@@ -98,9 +106,7 @@ public class OyunTahtasi implements Guncelleme {
     }
 
     /*
-    |--------------------------------------------------------------------------
-    | Oyun Yönetimi
-    |--------------------------------------------------------------------------
+    >> OYUN YONETIMI
      */
     public void yeniOyun() {
         degerleriSifirla();
@@ -122,7 +128,7 @@ public class OyunTahtasi implements Guncelleme {
     }
 
     public void haritaDegistir() {
-        // Tüm karakter ve thread'leri durdur
+        // Varliklarin Thread'lerini sonlandir.
         for (Karakter karakter : _karakterler) {
             if (karakter instanceof Oyuncu) {
                 ((Oyuncu) karakter).sonlandir();
@@ -131,6 +137,7 @@ public class OyunTahtasi implements Guncelleme {
             }
         }
 
+        // Degiskenleri sifirla
         _zaman = Oyun.SURE_SABIT;
         _gosterilenEkran = 2;
         _oyun.sifirlaEkranYenileme();
@@ -140,6 +147,7 @@ public class OyunTahtasi implements Guncelleme {
         _mesajlar.clear();
         _varliklar = null;
 
+        // Haritayi olustur
         haritaDosyasiOlustur("dunya/Harita.txt", 13, 33, seciliOzellik);
 
         if (DEMO_MODE)
@@ -241,14 +249,25 @@ public class OyunTahtasi implements Guncelleme {
         return false;
     }
 
+    public void bombaTetikle() {
+        for (Bomba b : _bombalar) {
+            b.patlat();
+        }
+    }
+
     /*
-    |--------------------------------------------------------------------------
-    | Oyun Bitirme
-    |--------------------------------------------------------------------------
+    >> OYUN BITIRME VE SEVIYE ATLAMA
      */
     protected void zamanDolduMu() {
         if (_zaman <= 0)
             oyunBitir();
+    }
+
+    public int zamanAzalt() {
+        if (_oyun.oyunDurduMu())
+            return this._zaman;
+        else
+            return this._zaman--;
     }
 
     public void oyunBitir() {
@@ -318,9 +337,7 @@ public class OyunTahtasi implements Guncelleme {
     }
 
     /*
-    |--------------------------------------------------------------------------
-    | Oyun Duraklatma
-    |--------------------------------------------------------------------------
+    >> OYUN DURAKLATMA VE DEVAM ETME
      */
     public void oyunDuraklatAyarlar() {
         _oyun.sifirlaEkranYenileme();
@@ -350,9 +367,7 @@ public class OyunTahtasi implements Guncelleme {
     }
 
     /*
-    |--------------------------------------------------------------------------
-    | Ekran Gösterme
-    |--------------------------------------------------------------------------
+    >> EKRAN GOSTERIMI
      */
     public void ekranGoster(Graphics g) {
         _ekran.yaziTipiYukle();
@@ -379,9 +394,7 @@ public class OyunTahtasi implements Guncelleme {
     }
 
     /*
-    |--------------------------------------------------------------------------
-    | Getters & Setters
-    |--------------------------------------------------------------------------
+    >> NESNE YONETIMI
      */
     public Nesne getVarlik(double x, double y, Karakter m) {
         Nesne res;
@@ -478,9 +491,7 @@ public class OyunTahtasi implements Guncelleme {
     }
 
     /*
-    |--------------------------------------------------------------------------
-    | Ekleme
-    |--------------------------------------------------------------------------
+    >> NESNE EKLEME
      */
     public void addVarlik(int pos, Nesne e) {
         _varliklar[pos] = e;
@@ -499,11 +510,8 @@ public class OyunTahtasi implements Guncelleme {
     }
 
     /*
-    |--------------------------------------------------------------------------
-    | Cizim
-    |--------------------------------------------------------------------------
+    >> EKRANA NESNE CIZIMI
      */
-
     protected void karakterCiz(Ekran screen) {
         for (Karakter karakter : _karakterler) {
             karakter.olustur(screen);
@@ -525,9 +533,7 @@ public class OyunTahtasi implements Guncelleme {
     }
 
     /*
-    |--------------------------------------------------------------------------
-    | Guncelleme
-    |--------------------------------------------------------------------------
+    >> NESNE GUNCELLEME
      */
     protected void varlikGuncelle() {
         if (_oyun.oyunDurduMu()) return;
@@ -577,9 +583,7 @@ public class OyunTahtasi implements Guncelleme {
     }
 
     /*
-    |--------------------------------------------------------------------------
-    | Getters & Setters
-    |--------------------------------------------------------------------------
+    >> GETTER VE SETTER METODLARI
      */
     public Klavye getGirdi() {
         return _girdi;
@@ -629,11 +633,24 @@ public class OyunTahtasi implements Guncelleme {
         can = i;
     }
 
-    public int zamanAzalt() {
-        if (_oyun.oyunDurduMu())
-            return this._zaman;
-        else
-            return this._zaman--;
+    public static char getSeciliOzellik() {
+        return seciliOzellik;
+    }
+
+    public static void setSeciliOzellik(char seciliOzellik) {
+        OyunTahtasi.seciliOzellik = seciliOzellik;
+    }
+
+    public static int getSeciliTema() {
+        return seciliTema;
+    }
+
+    public static void setSeciliTema(int seciliTema) {
+        OyunTahtasi.seciliTema = seciliTema;
+    }
+
+    public static ArrayList<Character> getOzellikListe() {
+        return ozellikListe;
     }
 
     public int getPuanlar() {

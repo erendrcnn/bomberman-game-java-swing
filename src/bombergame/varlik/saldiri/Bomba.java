@@ -14,7 +14,7 @@ import bombergame.varlik.karakter.dusman.Canavar;
 public class Bomba extends AnimasyonluNesne {
 
     protected double _patlamaSuresi = 120;
-    public int _kaldirilmaSuresi = 20;
+    protected int _kaldirilmaSuresi = 20;
     protected OyunTahtasi _oyunTahtasi;
     protected boolean _uzerindenAtlanabilir = true;
     protected PatlamaYayilim[] _alevler = null;
@@ -61,14 +61,14 @@ public class Bomba extends AnimasyonluNesne {
     }
 
     public void alevOlustur(Ekran screen) {
-        for (PatlamaYayilim explosion : _alevler) {
-            explosion.olustur(screen);
+        for (PatlamaYayilim patlama : _alevler) {
+            patlama.olustur(screen);
         }
     }
 
     public void alevGuncelle() {
-        for (PatlamaYayilim explosion : _alevler) {
-            explosion.guncelle();
+        for (PatlamaYayilim patlama : _alevler) {
+            patlama.guncelle();
         }
     }
 
@@ -95,9 +95,9 @@ public class Bomba extends AnimasyonluNesne {
     public Patlama patlamaKonum(int x, int y) {
         if (!_patladi) return null;
 
-        for (PatlamaYayilim explosion : _alevler) {
-            if (explosion == null) return null;
-            Patlama e = explosion.patlamaKonum(x, y);
+        for (PatlamaYayilim patlama : _alevler) {
+            if (patlama == null) return null;
+            Patlama e = patlama.patlamaKonum(x, y);
             if (e != null) return e;
         }
 
@@ -108,12 +108,12 @@ public class Bomba extends AnimasyonluNesne {
     public boolean kesisme(Nesne e) {
 
         if (e instanceof Oyuncu) {
-            double diffX = e.getX() - Koordinat.hucredenPiksele(getX());
-            double diffY = e.getY() - Koordinat.hucredenPiksele(getY());
+            double xFark = e.getX() - Koordinat.hucredenPiksele(getX());
+            double yFark = e.getY() - Koordinat.hucredenPiksele(getY());
 
-            if (!(diffX >= -13 && diffX < 16 && diffY >= 1 && diffY <= 30)) {
-                // System.out.println(e.getX() +" "+ Coordinates.tileToPixel(getX()) +" "+ diffX);
-                // System.out.println(e.getY() +" "+ Coordinates.tileToPixel(getY()) +" "+ diffY);
+            if (!(xFark >= -13 && xFark < 16 && yFark >= 1 && yFark <= 30)) {
+                // System.out.println(e.getX() + " " + Koordinat.hucredenPiksele(getX()) + " " + xFark);
+                // System.out.println(e.getY() + " " + Koordinat.hucredenPiksele(getY()) + " " + yFark);
                 _uzerindenAtlanabilir = false;
             }
 

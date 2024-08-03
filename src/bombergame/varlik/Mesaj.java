@@ -15,7 +15,7 @@ public class Mesaj extends Nesne {
         _x = x;
         _y = y;
         _metin = msg;
-        _sure = sure * 60; //seconds
+        _sure = sure * 60;      // Saniye cinsine cevirme.
         _renk = renk;
         _boyut = boyut;
     }

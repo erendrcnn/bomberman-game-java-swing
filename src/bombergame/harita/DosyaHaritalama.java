@@ -23,14 +23,14 @@ import java.util.StringTokenizer;
 
 public class DosyaHaritalama extends Haritalama implements SabitDegiskenler {
 
-    public DosyaHaritalama(String path, OyunTahtasi oyunTahtasi) {
-        super(path, oyunTahtasi);
+    public DosyaHaritalama(String dosyaYolu, OyunTahtasi oyunTahtasi) {
+        super(dosyaYolu, oyunTahtasi);
     }
 
     @Override
-    public void haritaYukle(String path) {
+    public void haritaYukle(String dosyaYolu) {
         try {
-            URL absPath = DosyaHaritalama.class.getResource("/" + path);
+            URL absPath = DosyaHaritalama.class.getResource("/" + dosyaYolu);
             assert absPath != null;
             BufferedReader in = new BufferedReader(new InputStreamReader(absPath.openStream()));
 
@@ -48,7 +48,7 @@ public class DosyaHaritalama extends Haritalama implements SabitDegiskenler {
 
             in.close();
         } catch (IOException e) {
-            System.out.println("[HATA] Harita olusturulamadi! : " + path);
+            System.out.println("[HATA] Harita olusturulamadi! : " + dosyaYolu);
         }
     }
 
@@ -68,7 +68,7 @@ public class DosyaHaritalama extends Haritalama implements SabitDegiskenler {
                 sag_ust_sinirSecili, sag_alt_sinirSecili, sol_alt_sinirSecili;
 
         // Seçili temaya göre model nesnelerini belirle
-        switch (OyunTahtasi.seciliTema) {
+        switch (OyunTahtasi.getSeciliTema()) {
             case 2:
                 cikisKapisiSecili = cikisKapisi2;
                 saglamDuvarSecili = saglamDuvar2;

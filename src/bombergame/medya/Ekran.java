@@ -122,9 +122,7 @@ public class Ekran implements SabitDegiskenler {
     }
 
     /*
-    |--------------------------------------------------------------------------
-    | Oyun Ekrani Cizimleri
-    |--------------------------------------------------------------------------
+    >> OYUN EKRANI CIZIMLERI VE METINLERI
      */
 
     public void yaziTipiYukle() {
@@ -189,7 +187,7 @@ public class Ekran implements SabitDegiskenler {
         ayarlarSabitleme = ayarlar.getScaledInstance(hedefGenislik, hedefYukseklik, Image.SCALE_DEFAULT);
         ortaGorselCiz(ayarlarSabitleme, hedefGenislik, hedefYukseklik, getGercekGenislik(), getGercekYukseklik(), g);
 
-        switch (OyunTahtasi.seciliOzellik) {
+        switch (OyunTahtasi.getSeciliOzellik()) {
             case 'B': // OzellikBomba
                 g.drawString("Sari", Oyun.GENISLIK + 155, Oyun.YUKSEKLIK + 65);
                 break;
@@ -207,7 +205,7 @@ public class Ekran implements SabitDegiskenler {
                 break;
         }
 
-        switch (OyunTahtasi.seciliTema) {
+        switch (OyunTahtasi.getSeciliTema()) {
             case 1:
                 g.drawString("Standart", Oyun.GENISLIK + 125, Oyun.YUKSEKLIK + 160);
                 break;

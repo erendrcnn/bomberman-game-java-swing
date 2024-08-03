@@ -18,32 +18,38 @@ import java.io.*;
 
 public class Oyun extends Canvas implements MouseListener, MouseMotionListener, SabitDegiskenler {
 
+    /*
+    >> SABIT DEGISKENLER
+     */
+
     public static final int KARE_BOYUT = 16;
     public static final int GENISLIK = KARE_BOYUT * (33 / 2);
     public static final int YUKSEKLIK = 13 * KARE_BOYUT;
     public static final int OLCEK = 3;
-    public static final String BASLIK = "Bomberman Game - Java Swing (Eren Durucan)";
+    private static final String BASLIK = "Bomberman Game - Java Swing (Eren Durucan)";
     private static final int BOMBACEPHANE = 1;
     private static final int BOMBAALAN = 1;
     private static final boolean BOMBAKONTROL = false;
     private static final boolean ATLAMA = false;
     private static final double OYUNCUHIZ = 0.7;
     private static final int EKRANYENILEME = 2;
-    public static final int SURE_SABIT = 200;
-    public static final int PUAN_SABIT = 0;
-    public static final int SEVITE_SABIT = 1;
-    public static final int CAN_SABIT = 2;
-    public static int _maxPuan = 0;
+    protected static final int SURE_SABIT = 200;
+    protected static final int PUAN_SABIT = 0;
+    protected static final int SEVITE_SABIT = 1;
+    protected static final int CAN_SABIT = 2;
 
+    /*
+    >> DEGISKENLER
+     */
+
+    private static int _maxPuan = 0;
     protected static int bombaCephane = BOMBACEPHANE;
     protected static int bombaAlan = BOMBAALAN;
     protected static boolean bombaKontrol = BOMBAKONTROL;
     protected static boolean atlama = ATLAMA;
     protected static double oyuncuHiz = OYUNCUHIZ;
-
     protected int _ekranYenileme = EKRANYENILEME;
 
-    private Klavye _girdi;
     private boolean _oyunDevam = false;
     private boolean _menu = true;
     private boolean _oyunDurdu = true;
@@ -51,6 +57,7 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
     public boolean oyunBitti = false;
     public boolean oyunYenilendi = false;
 
+    private Klavye _girdi;
     private OyunTahtasi _oyunTahtasi;
     private Ekran ekran;
     private Pencere _pencere;
@@ -70,17 +77,9 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
         addMouseMotionListener(this);
     }
 
-    public static void setKontrol(boolean b) {
-        bombaKontrol = b;
-    }
-
-    public static void setAtlama(boolean b) {
-        atlama = b;
-    }
-
-    public static boolean getAtlama() {
-        return atlama;
-    }
+    /*
+    >> OYUN BASLATMA VE YENILEME
+     */
 
     private void oyunuYenile() {
         BufferStrategy bs = getBufferStrategy();
@@ -217,6 +216,10 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
         }
     }
 
+    /*
+    >> OYUN KAYIT VE OKUMA
+     */
+
     public void oyunKayit() {
         try (BufferedWriter out = new BufferedWriter(new FileWriter(kayitDosyasi))) {
             out.write(_oyunTahtasi.getPuanlar() + "\n");
@@ -280,6 +283,10 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
         }
     }
 
+    /*
+    >> MOUSE HAREKETLERI VE EYLEMLERI
+     */
+
     @Override
     public void mouseClicked(MouseEvent e) {
         handleMouseClick(e);
@@ -327,7 +334,7 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
             } else {
                 getOyunTahtasi().yeniOyun();
             }
-            switch (OyunTahtasi.seciliTema) {
+            switch (OyunTahtasi.getSeciliTema()) {
                 case 2 -> _pencere.getBilgiPanel().arkaplanDegistir(arkaPlanRenk2);
                 case 3 -> _pencere.getBilgiPanel().arkaplanDegistir(arkaPlanRenk3);
                 case 4 -> _pencere.getBilgiPanel().arkaplanDegistir(arkaPlanRenk4);
@@ -353,47 +360,51 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
 
     private void handleOzellikDegistir(MouseEvent e, Rectangle sagButon, Rectangle solButon) {
         if (sagButon.contains(e.getX(), e.getY()) && ayarlarMenusu) {
-            OyunTahtasi.seciliOzellik = switch (OyunTahtasi.seciliOzellik) {
+            char secilen = switch (OyunTahtasi.getSeciliOzellik()) {
                 case 'B' -> 'M';
                 case 'M' -> 'A';
                 case 'A' -> 'H';
                 case 'H' -> 'K';
                 case 'K' -> 'B';
-                default -> OyunTahtasi.seciliOzellik;
+                default -> OyunTahtasi.getSeciliOzellik();
             };
+            OyunTahtasi.setSeciliOzellik(secilen);
         }
 
         if (solButon.contains(e.getX(), e.getY()) && ayarlarMenusu) {
-            OyunTahtasi.seciliOzellik = switch (OyunTahtasi.seciliOzellik) {
+            char secilen = switch (OyunTahtasi.getSeciliOzellik()) {
                 case 'B' -> 'K';
                 case 'M' -> 'B';
                 case 'A' -> 'M';
                 case 'H' -> 'A';
                 case 'K' -> 'H';
-                default -> OyunTahtasi.seciliOzellik;
+                default -> OyunTahtasi.getSeciliOzellik();
             };
+            OyunTahtasi.setSeciliOzellik(secilen);
         }
     }
 
     private void handleTemaDegistir(MouseEvent e, Rectangle sagButon, Rectangle solButon) {
         if (sagButon.contains(e.getX(), e.getY()) && ayarlarMenusu) {
-            OyunTahtasi.seciliTema = switch (OyunTahtasi.seciliTema) {
+            int secilen = switch (OyunTahtasi.getSeciliTema()) {
                 case 1 -> 2;
                 case 2 -> 3;
                 case 3 -> 4;
                 case 4 -> 1;
-                default -> OyunTahtasi.seciliTema;
+                default -> OyunTahtasi.getSeciliTema();
             };
+            OyunTahtasi.setSeciliTema(secilen);
         }
 
         if (solButon.contains(e.getX(), e.getY()) && ayarlarMenusu) {
-            OyunTahtasi.seciliTema = switch (OyunTahtasi.seciliTema) {
+            int secilen = switch (OyunTahtasi.getSeciliTema()) {
                 case 1 -> 4;
                 case 2 -> 1;
                 case 3 -> 2;
                 case 4 -> 3;
-                default -> OyunTahtasi.seciliTema;
+                default -> OyunTahtasi.getSeciliTema();
             };
+            OyunTahtasi.setSeciliTema(secilen);
         }
     }
 
@@ -477,6 +488,10 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
     public void mouseExited(MouseEvent e) {
     }
 
+    /*
+    >> GETTER VE SETTER METODLARI
+     */
+
     public static double getOyuncuHiz() {
         return oyuncuHiz;
     }
@@ -503,6 +518,18 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
 
     public static void addBombaCephane(int i) {
         bombaCephane += i;
+    }
+
+    public static void setKontrol(boolean b) {
+        bombaKontrol = b;
+    }
+
+    public static void setAtlama(boolean b) {
+        atlama = b;
+    }
+
+    public static boolean getAtlama() {
+        return atlama;
     }
 
     public int getEkranYenileme() {

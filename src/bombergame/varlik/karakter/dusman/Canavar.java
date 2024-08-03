@@ -249,7 +249,7 @@ public abstract class Canavar extends Karakter implements Runnable {
         }
         _canli = false;
         _oyunTahtasi.addPuanlar(puanDegeri);
-        Mesaj msg = new Mesaj("+" + puanDegeri, getXMessage(), getYMessage(), 2, Color.white, 14);
+        Mesaj msg = new Mesaj("+" + puanDegeri, getXMesaj(), getYMesaj(), 2, Color.white, 14);
         _oyunTahtasi.addMesaj(msg);
     }
 

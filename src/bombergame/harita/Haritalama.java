@@ -7,13 +7,13 @@ public abstract class Haritalama implements IHaritalama {
     protected String[] satir;
     protected OyunTahtasi oyunTahtasi;
 
-    public Haritalama(String path, OyunTahtasi oyunTahtasi) {
-        haritaYukle(path);
+    public Haritalama(String dosyaYolu, OyunTahtasi oyunTahtasi) {
+        haritaYukle(dosyaYolu);
         this.oyunTahtasi = oyunTahtasi;
     }
 
     @Override
-    public abstract void haritaYukle(String path);
+    public abstract void haritaYukle(String dosyaYolu);
 
     public abstract void varlikOlustur();
 

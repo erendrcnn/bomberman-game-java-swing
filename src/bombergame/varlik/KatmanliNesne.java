@@ -16,9 +16,10 @@ public class KatmanliNesne extends Nesne {
         for (int i = 0; i < entities.length; i++) {
             _varliklar.add(entities[i]);
 
-            if (i > 1) { //Add to destroyable tiles the bellow model for rendering in explosion
+            // Patlama sonrasinda patlayan nesnelerin altina gizlenen nesneleri ekler.
+            if (i > 1) {
                 if (entities[i] instanceof KirilganZemin)
-                    ((KirilganZemin) entities[i]).addBelowSprite(entities[i - 1].getModel());
+                    ((KirilganZemin) entities[i]).altTabakayaEkle(entities[i - 1].getModel());
             }
         }
     }
@@ -43,7 +44,7 @@ public class KatmanliNesne extends Nesne {
 
         if (top.kaldirildiMi()) {
             haritaMatrix[(int) _varliklar.getLast()._y][(int) _varliklar.getLast()._x] = 1;
-            /* DEBUG
+            /* KONTROL AMACLI
             System.out.println(_entities.getLast()._x + " " + _entities.getLast()._y );
             for (int i = 0; i < 13; i++) {
                 for (int j = 0; j < 33; j++) System.out.print(matrix[i][j] + " ");

@@ -34,9 +34,7 @@ public class Pencere extends JFrame {
     }
 
 	/*
-	|--------------------------------------------------------------------------
-	| Anlık Bilgileri Güncelleme
-	|--------------------------------------------------------------------------
+	>> ANLIK BILGILERIN SUREKLI GUNCELLENMESI ICIN GETTER VE SETTER METOTLARI
 	 */
 
     public BilgiPanel getBilgiPanel() {

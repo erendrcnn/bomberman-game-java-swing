@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 
 public class Klavye implements KeyListener {
 
-    private final boolean[] tuslar = new boolean[160]; // 160 tane tus yetecektir.
+    private final boolean[] tuslar = new boolean[160]; // Klavye tuslarini tutmak icin kullanilir.
     public boolean yukariHareket, asagiHareket, solHareket, sagHareket, bomba, kumanda, mola;
 
     public void update() {

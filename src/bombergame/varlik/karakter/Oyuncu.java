@@ -163,7 +163,7 @@ public class Oyuncu extends Karakter implements Runnable {
 
         _canli = false;
         olumMuzik.muzikCal(0);
-        Mesaj msg = new Mesaj("Öldün...", getXMessage(), getYMessage(), 2, Color.white, 14);
+        Mesaj msg = new Mesaj("Öldün...", getXMesaj(), getYMesaj(), 2, Color.white, 14);
         _oyunTahtasi.addMesaj(msg);
     }
 
@@ -277,22 +277,23 @@ public class Oyuncu extends Karakter implements Runnable {
     public void ozellikEkle(Ozellik p) {
         if (p.kaldirildiMi()) return;
 
+
         _ozellikler.add(p);
         switch (p.toString()) {
             case "OzellikBomba":
-                OyunTahtasi.ozellikListe.remove((Character) 'B');
+                OyunTahtasi.getOzellikListe().remove((Character) 'B');
                 break;
             case "OzellikMenzil":
-                OyunTahtasi.ozellikListe.remove((Character) 'M');
+                OyunTahtasi.getOzellikListe().remove((Character) 'M');
                 break;
             case "OzellikHiz":
-                OyunTahtasi.ozellikListe.remove((Character) 'H');
+                OyunTahtasi.getOzellikListe().remove((Character) 'H');
                 break;
             case "OzellikKumanda":
-                OyunTahtasi.ozellikListe.remove((Character) 'K');
+                OyunTahtasi.getOzellikListe().remove((Character) 'K');
                 break;
             case "OzellikAtlama":
-                OyunTahtasi.ozellikListe.remove((Character) 'A');
+                OyunTahtasi.getOzellikListe().remove((Character) 'A');
                 break;
         }
         esyaAlmaMuzik.muzikCal(0);

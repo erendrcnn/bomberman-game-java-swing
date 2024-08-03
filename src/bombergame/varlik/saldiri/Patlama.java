@@ -9,7 +9,7 @@ import bombergame.varlik.karakter.Karakter;
 
 public class Patlama extends Nesne {
 
-    protected boolean _sonuncu = false;
+    protected boolean _sonuncu;
     protected OyunTahtasi _oyunTahtasi;
 
     public Patlama(int x, int y, int direction, boolean sonMu, OyunTahtasi oyunTahtasi) {

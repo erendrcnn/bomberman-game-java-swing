@@ -2,6 +2,27 @@
 
 ![bombarman-turkce](gameplay.gif)
 
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#structure-of-the-assignment">Structure of the Assignment</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#challenges-and-solutions">Challenges and Solutions</a></li>
+        <li><a href="#working-and-non-working-parts">Working and Non-working Parts</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#installation-instructions">Installation Instructions</a>
+    </li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contributions">Contributions</a></li>
+  </ol>
+</details>
+
 ## Overview
 This project is a Java application that implements the Bomberman game using Java Swing. The player's goal is to reach the door behind destructible walls and blow up monsters to pass through the door. The player must achieve these objectives within a specified time (200 seconds). The project includes aspects of game development, graphical design, algorithm development, and multithreading.
 
@@ -12,10 +33,10 @@ The Bomberman game is developed using the following classes and components:
 
 ### Statistics
 
-- Total Lines: 4353
-- Source Code Lines: 3443 (79%)
+- Total Lines: 4429
+- Source Code Lines: 3511 (79%)
 - Comment Lines: 176 (4%)
-- Blank Lines: 734 (17%)
+- Blank Lines: 742 (17%)
 
 ### Mapping
 - **FileMapping**: A class for reading and processing map files.
@@ -64,6 +85,14 @@ The Bomberman game is developed using the following classes and components:
 - **FeatureBomb**: Grants the ability to place more bombs.
 - **FeatureRemote**: Allows remote detonation of bombs.
 - **FeatureSpeed**: Increases the player's movement speed.
+
+### Themes
+The game includes four different themes that players can choose from:
+
+- **Standard**: The classic Bomberman theme.
+- **Space**: A futuristic theme with space elements.
+- **Forest**: A nature-inspired theme with forest elements.
+- **Desert**: A sandy, arid theme with desert elements.
 
 ## Gameplay
 1. **Start Screen**:
@@ -156,7 +185,7 @@ To run the Bomberman game on your local machine using IntelliJ IDEA, follow thes
 
 6. **Run the Game:**
    - In the **Project** view, navigate to the `src` directory.
-   - Find the main class file that contains the `public static void main(String[] args)` method. This is typically named `Bomberman.java` or similar.
+   - Find the main class file (`Bomberman.java`) that contains the `public static void main(String[] args)` method.
    - Right-click on the main class file and select **Run 'Bomberman.main()'**. Alternatively, you can create a run configuration:
      - Go to **Run** > **Edit Configurations...**
      - Click on the **+** icon and select **Application**.

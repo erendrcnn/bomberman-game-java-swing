@@ -65,7 +65,7 @@ public class BilgiPanel extends JPanel implements SabitDegiskenler {
         sesButon = new JButton();
         sesButon.setIcon(sesIkon);
 
-        switch (OyunTahtasi.seciliTema) {
+        switch (OyunTahtasi.getSeciliTema()) {
             case 2:
                 sesButon.setBackground(arkaPlanRenk2);
                 break;
@@ -102,7 +102,7 @@ public class BilgiPanel extends JPanel implements SabitDegiskenler {
 
         ayarlarButon = new JButton();
 
-        switch (OyunTahtasi.seciliTema) {
+        switch (OyunTahtasi.getSeciliTema()) {
             case 2:
                 ayarlarButon.setBackground(arkaPlanRenk2);
                 break;
@@ -135,7 +135,7 @@ public class BilgiPanel extends JPanel implements SabitDegiskenler {
 
         sifirlaButon = new JButton();
 
-        switch (OyunTahtasi.seciliTema) {
+        switch (OyunTahtasi.getSeciliTema()) {
             case 2:
                 sifirlaButon.setBackground(arkaPlanRenk2);
                 break;
@@ -173,7 +173,7 @@ public class BilgiPanel extends JPanel implements SabitDegiskenler {
         add(sesEtiket);
         add(ayarlarEtiket);
 
-        switch (OyunTahtasi.seciliTema) {
+        switch (OyunTahtasi.getSeciliTema()) {
             case 2:
                 setBackground(arkaPlanRenk2);
                 break;

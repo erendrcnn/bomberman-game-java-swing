@@ -7,15 +7,18 @@ import bombergame.medya.Muzik;
 import javax.swing.*;
 import java.awt.*;
 
+/*
+ >> Bu arayüz, oyunun tum sabit degiskenlerini ve sabit nesnelerini icerir.
+ */
 public interface SabitDegiskenler {
     int HARITA_GENISLIK = 33;
     int HARITA_YUKSEKLIK = 13;
-    int[][] haritaMatrix = new int[HARITA_YUKSEKLIK][HARITA_GENISLIK]; // map size
+    int[][] haritaMatrix = new int[HARITA_YUKSEKLIK][HARITA_GENISLIK]; // HARITA BOYUTU
 
     String kayitDosyasi = "res/veri/kayit.txt";
     String skorDosyasi = "res/veri/MaxSkor.txt";
-    String fontDosyasi1 = "res/font/OYUNFONT1.otf"; // JOYSTICK
-    String fontDosyasi2 = "res/font/OYUNFONT2.ttf"; // VBBRUSHTB Bold
+    String fontDosyasi1 = "res/font/OYUNFONT1.otf";             // Font: JOYSTICK
+    String fontDosyasi2 = "res/font/OYUNFONT2.ttf";             // Font: VBBRUSHTB Bold
     String ayarlarPanel = "res/model/ayarlar-tablo.png";
     String arkaPlanPanel = "res/model/anamenu.png";
     String yeniOyunPanel = "res/model/yeni-oyun.png";
@@ -42,81 +45,81 @@ public interface SabitDegiskenler {
     ModelYapisi harita3 = new ModelYapisi("/model/haritalama3.png", 64);
     ModelYapisi harita4 = new ModelYapisi("/model/haritalama4.png", 64);
 
-    Model cikisKapisi = new Model(16, 0, 0, ModelYapisi.harita, 14, 14);
-    Model saglamDuvar = new Model(16, 1, 0, ModelYapisi.harita, 16, 16);
-    Model koridor = new Model(16, 2, 0, ModelYapisi.harita, 16, 16);
+    Model cikisKapisi = new Model(16, 0, 0, ModelYapisi.harita);
+    Model saglamDuvar = new Model(16, 1, 0, ModelYapisi.harita);
+    Model koridor = new Model(16, 2, 0, ModelYapisi.harita);
 
-    Model kirilabilirDuvar = new Model(16, 0, 1, ModelYapisi.harita, 16, 16);
-    Model kirilabilirDuvar_patla1 = new Model(16, 1, 1, ModelYapisi.harita, 16, 16);
-    Model kirilabilirDuvar_patla2 = new Model(16, 2, 1, ModelYapisi.harita, 16, 16);
-    Model kirilabilirDuvar_patla3 = new Model(16, 3, 1, ModelYapisi.harita, 16, 16);
+    Model kirilabilirDuvar = new Model(16, 0, 1, ModelYapisi.harita);
+    Model kirilabilirDuvar_patla1 = new Model(16, 1, 1, ModelYapisi.harita);
+    Model kirilabilirDuvar_patla2 = new Model(16, 2, 1, ModelYapisi.harita);
+    Model kirilabilirDuvar_patla3 = new Model(16, 3, 1, ModelYapisi.harita);
 
-    Model ust_sinir = new Model(16, 0, 2, ModelYapisi.harita, 16, 16);
-    Model sol_sinir = new Model(16, 1, 2, ModelYapisi.harita, 16, 16);
-    Model sag_sinir = new Model(16, 2, 2, ModelYapisi.harita, 16, 16);
-    Model alt_sinir = new Model(16, 3, 2, ModelYapisi.harita, 16, 16);
+    Model ust_sinir = new Model(16, 0, 2, ModelYapisi.harita);
+    Model sol_sinir = new Model(16, 1, 2, ModelYapisi.harita);
+    Model sag_sinir = new Model(16, 2, 2, ModelYapisi.harita);
+    Model alt_sinir = new Model(16, 3, 2, ModelYapisi.harita);
 
-    Model sol_ust_sinir = new Model(16, 0, 3, ModelYapisi.harita, 16, 16);
-    Model sag_ust_sinir = new Model(16, 1, 3, ModelYapisi.harita, 16, 16);
-    Model sag_alt_sinir = new Model(16, 2, 3, ModelYapisi.harita, 16, 16);
-    Model sol_alt_sinir = new Model(16, 3, 3, ModelYapisi.harita, 16, 16);
+    Model sol_ust_sinir = new Model(16, 0, 3, ModelYapisi.harita);
+    Model sag_ust_sinir = new Model(16, 1, 3, ModelYapisi.harita);
+    Model sag_alt_sinir = new Model(16, 2, 3, ModelYapisi.harita);
+    Model sol_alt_sinir = new Model(16, 3, 3, ModelYapisi.harita);
 
-    Model cikisKapisi2 = new Model(16, 0, 0, ModelYapisi.harita2, 14, 14);
-    Model saglamDuvar2 = new Model(16, 1, 0, ModelYapisi.harita2, 16, 16);
-    Model koridor2 = new Model(16, 2, 0, ModelYapisi.harita2, 16, 16);
+    Model cikisKapisi2 = new Model(16, 0, 0, ModelYapisi.harita2);
+    Model saglamDuvar2 = new Model(16, 1, 0, ModelYapisi.harita2);
+    Model koridor2 = new Model(16, 2, 0, ModelYapisi.harita2);
 
-    Model kirilabilirDuvar2 = new Model(16, 0, 1, ModelYapisi.harita2, 16, 16);
-    Model kirilabilirDuvar_patla12 = new Model(16, 1, 1, ModelYapisi.harita2, 16, 16);
-    Model kirilabilirDuvar_patla22 = new Model(16, 2, 1, ModelYapisi.harita2, 16, 16);
-    Model kirilabilirDuvar_patla32 = new Model(16, 3, 1, ModelYapisi.harita2, 16, 16);
+    Model kirilabilirDuvar2 = new Model(16, 0, 1, ModelYapisi.harita2);
+    Model kirilabilirDuvar_patla12 = new Model(16, 1, 1, ModelYapisi.harita2);
+    Model kirilabilirDuvar_patla22 = new Model(16, 2, 1, ModelYapisi.harita2);
+    Model kirilabilirDuvar_patla32 = new Model(16, 3, 1, ModelYapisi.harita2);
 
-    Model ust_sinir2 = new Model(16, 0, 2, ModelYapisi.harita2, 16, 16);
-    Model sol_sinir2 = new Model(16, 1, 2, ModelYapisi.harita2, 16, 16);
-    Model sag_sinir2 = new Model(16, 2, 2, ModelYapisi.harita2, 16, 16);
-    Model alt_sinir2 = new Model(16, 3, 2, ModelYapisi.harita2, 16, 16);
+    Model ust_sinir2 = new Model(16, 0, 2, ModelYapisi.harita2);
+    Model sol_sinir2 = new Model(16, 1, 2, ModelYapisi.harita2);
+    Model sag_sinir2 = new Model(16, 2, 2, ModelYapisi.harita2);
+    Model alt_sinir2 = new Model(16, 3, 2, ModelYapisi.harita2);
 
-    Model sol_ust_sinir2 = new Model(16, 0, 3, ModelYapisi.harita2, 16, 16);
-    Model sag_ust_sinir2 = new Model(16, 1, 3, ModelYapisi.harita2, 16, 16);
-    Model sag_alt_sinir2 = new Model(16, 2, 3, ModelYapisi.harita2, 16, 16);
-    Model sol_alt_sinir2 = new Model(16, 3, 3, ModelYapisi.harita2, 16, 16);
+    Model sol_ust_sinir2 = new Model(16, 0, 3, ModelYapisi.harita2);
+    Model sag_ust_sinir2 = new Model(16, 1, 3, ModelYapisi.harita2);
+    Model sag_alt_sinir2 = new Model(16, 2, 3, ModelYapisi.harita2);
+    Model sol_alt_sinir2 = new Model(16, 3, 3, ModelYapisi.harita2);
 
-    Model cikisKapisi3 = new Model(16, 0, 0, ModelYapisi.harita3, 14, 14);
-    Model saglamDuvar3 = new Model(16, 1, 0, ModelYapisi.harita3, 16, 16);
-    Model koridor3 = new Model(16, 2, 0, ModelYapisi.harita3, 16, 16);
+    Model cikisKapisi3 = new Model(16, 0, 0, ModelYapisi.harita3);
+    Model saglamDuvar3 = new Model(16, 1, 0, ModelYapisi.harita3);
+    Model koridor3 = new Model(16, 2, 0, ModelYapisi.harita3);
 
-    Model kirilabilirDuvar3 = new Model(16, 0, 1, ModelYapisi.harita3, 16, 16);
-    Model kirilabilirDuvar_patla13 = new Model(16, 1, 1, ModelYapisi.harita3, 16, 16);
-    Model kirilabilirDuvar_patla23 = new Model(16, 2, 1, ModelYapisi.harita3, 16, 16);
-    Model kirilabilirDuvar_patla33 = new Model(16, 3, 1, ModelYapisi.harita3, 16, 16);
+    Model kirilabilirDuvar3 = new Model(16, 0, 1, ModelYapisi.harita3);
+    Model kirilabilirDuvar_patla13 = new Model(16, 1, 1, ModelYapisi.harita3);
+    Model kirilabilirDuvar_patla23 = new Model(16, 2, 1, ModelYapisi.harita3);
+    Model kirilabilirDuvar_patla33 = new Model(16, 3, 1, ModelYapisi.harita3);
 
-    Model ust_sinir3 = new Model(16, 0, 2, ModelYapisi.harita3, 16, 16);
-    Model sol_sinir3 = new Model(16, 1, 2, ModelYapisi.harita3, 16, 16);
-    Model sag_sinir3 = new Model(16, 2, 2, ModelYapisi.harita3, 16, 16);
-    Model alt_sinir3 = new Model(16, 3, 2, ModelYapisi.harita3, 16, 16);
+    Model ust_sinir3 = new Model(16, 0, 2, ModelYapisi.harita3);
+    Model sol_sinir3 = new Model(16, 1, 2, ModelYapisi.harita3);
+    Model sag_sinir3 = new Model(16, 2, 2, ModelYapisi.harita3);
+    Model alt_sinir3 = new Model(16, 3, 2, ModelYapisi.harita3);
 
-    Model sol_ust_sinir3 = new Model(16, 0, 3, ModelYapisi.harita3, 16, 16);
-    Model sag_ust_sinir3 = new Model(16, 1, 3, ModelYapisi.harita3, 16, 16);
-    Model sag_alt_sinir3 = new Model(16, 2, 3, ModelYapisi.harita3, 16, 16);
-    Model sol_alt_sinir3 = new Model(16, 3, 3, ModelYapisi.harita3, 16, 16);
+    Model sol_ust_sinir3 = new Model(16, 0, 3, ModelYapisi.harita3);
+    Model sag_ust_sinir3 = new Model(16, 1, 3, ModelYapisi.harita3);
+    Model sag_alt_sinir3 = new Model(16, 2, 3, ModelYapisi.harita3);
+    Model sol_alt_sinir3 = new Model(16, 3, 3, ModelYapisi.harita3);
 
-    Model cikisKapisi4 = new Model(16, 0, 0, ModelYapisi.harita4, 14, 14);
-    Model saglamDuvar4 = new Model(16, 1, 0, ModelYapisi.harita4, 16, 16);
-    Model koridor4 = new Model(16, 2, 0, ModelYapisi.harita4, 16, 16);
+    Model cikisKapisi4 = new Model(16, 0, 0, ModelYapisi.harita4);
+    Model saglamDuvar4 = new Model(16, 1, 0, ModelYapisi.harita4);
+    Model koridor4 = new Model(16, 2, 0, ModelYapisi.harita4);
 
-    Model kirilabilirDuvar4 = new Model(16, 0, 1, ModelYapisi.harita4, 16, 16);
-    Model kirilabilirDuvar_patla14 = new Model(16, 1, 1, ModelYapisi.harita4, 16, 16);
-    Model kirilabilirDuvar_patla24 = new Model(16, 2, 1, ModelYapisi.harita4, 16, 16);
-    Model kirilabilirDuvar_patla34 = new Model(16, 3, 1, ModelYapisi.harita4, 16, 16);
+    Model kirilabilirDuvar4 = new Model(16, 0, 1, ModelYapisi.harita4);
+    Model kirilabilirDuvar_patla14 = new Model(16, 1, 1, ModelYapisi.harita4);
+    Model kirilabilirDuvar_patla24 = new Model(16, 2, 1, ModelYapisi.harita4);
+    Model kirilabilirDuvar_patla34 = new Model(16, 3, 1, ModelYapisi.harita4);
 
-    Model ust_sinir4 = new Model(16, 0, 2, ModelYapisi.harita4, 16, 16);
-    Model sol_sinir4 = new Model(16, 1, 2, ModelYapisi.harita4, 16, 16);
-    Model sag_sinir4 = new Model(16, 2, 2, ModelYapisi.harita4, 16, 16);
-    Model alt_sinir4 = new Model(16, 3, 2, ModelYapisi.harita4, 16, 16);
+    Model ust_sinir4 = new Model(16, 0, 2, ModelYapisi.harita4);
+    Model sol_sinir4 = new Model(16, 1, 2, ModelYapisi.harita4);
+    Model sag_sinir4 = new Model(16, 2, 2, ModelYapisi.harita4);
+    Model alt_sinir4 = new Model(16, 3, 2, ModelYapisi.harita4);
 
-    Model sol_ust_sinir4 = new Model(16, 0, 3, ModelYapisi.harita4, 16, 16);
-    Model sag_ust_sinir4 = new Model(16, 1, 3, ModelYapisi.harita4, 16, 16);
-    Model sag_alt_sinir4 = new Model(16, 2, 3, ModelYapisi.harita4, 16, 16);
-    Model sol_alt_sinir4 = new Model(16, 3, 3, ModelYapisi.harita4, 16, 16);
+    Model sol_ust_sinir4 = new Model(16, 0, 3, ModelYapisi.harita4);
+    Model sag_ust_sinir4 = new Model(16, 1, 3, ModelYapisi.harita4);
+    Model sag_alt_sinir4 = new Model(16, 2, 3, ModelYapisi.harita4);
+    Model sol_alt_sinir4 = new Model(16, 3, 3, ModelYapisi.harita4);
 
     ImageIcon barIkon = new ImageIcon((new ImageIcon("res/model/merkez-bar.png")).getImage().getScaledInstance(80, 30, Image.SCALE_DEFAULT));
     ImageIcon ayarlarIkon = new ImageIcon((new ImageIcon("res/model/ayarlar.png")).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));

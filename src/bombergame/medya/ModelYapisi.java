@@ -12,9 +12,9 @@ public class ModelYapisi implements SabitDegiskenler {
     public int UZUNLUK;
     private String dosyaYolu;
 
-    public ModelYapisi(String dosyaYolu, int size) {
+    public ModelYapisi(String dosyaYolu, int uzunluk) {
         this.dosyaYolu = dosyaYolu;
-        UZUNLUK = size;
+        UZUNLUK = uzunluk;
         pikseller = new int[UZUNLUK * UZUNLUK];
         load();
     }
