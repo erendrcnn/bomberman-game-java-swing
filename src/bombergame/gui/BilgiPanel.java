@@ -35,7 +35,7 @@ public class BilgiPanel extends JPanel implements SabitDegiskenler {
         zamanEtiket.setIcon(barIkon);
         zamanEtiket.setText("Süre: " + oyun.getOyunTahtasi().getZaman());
         zamanEtiket.setForeground(Color.white);
-        zamanEtiket.setHorizontalAlignment(JLabel.RIGHT);
+        zamanEtiket.setHorizontalAlignment(JLabel.CENTER);
         zamanEtiket.setHorizontalTextPosition(JLabel.CENTER);
 
         puanEtiket = new JLabel();
@@ -49,14 +49,14 @@ public class BilgiPanel extends JPanel implements SabitDegiskenler {
         seviyeEtiket.setIcon(barIkon);
         seviyeEtiket.setText("Seviye: " + oyun.getOyunTahtasi().getSeviye());
         seviyeEtiket.setForeground(Color.white);
-        seviyeEtiket.setHorizontalAlignment(JLabel.LEFT);
+        seviyeEtiket.setHorizontalAlignment(JLabel.CENTER);
         seviyeEtiket.setHorizontalTextPosition(JLabel.CENTER);
 
         canEtiket = new JLabel();
         canEtiket.setIcon(barIkon);
         canEtiket.setText("Can: " + oyun.getOyunTahtasi().getCan());
         canEtiket.setForeground(Color.white);
-        canEtiket.setHorizontalAlignment(JLabel.LEFT);
+        canEtiket.setHorizontalAlignment(JLabel.CENTER);
         canEtiket.setHorizontalTextPosition(JLabel.CENTER);
 
         sesEtiket = new JLabel();

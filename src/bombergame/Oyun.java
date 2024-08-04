@@ -68,6 +68,7 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
     public Oyun(Pencere pencere) {
         this._pencere = pencere;
         this._pencere.setTitle(BASLIK);
+        this._pencere.setIconImage(uygulamaLogo);
         this.ekran = new Ekran(GENISLIK, YUKSEKLIK);
         this._girdi = new Klavye();
         this._oyunTahtasi = new OyunTahtasi(this, _girdi, ekran);
