@@ -35,7 +35,7 @@ public class Oyuncu extends Karakter implements Runnable {
         _bombalar = _oyunTahtasi.getBombalar();
         _girdi = _oyunTahtasi.getGirdi();
         _model = Model.oyuncu_sag;
-        oyuncuThread = new Thread(this);
+        oyuncuThread = new Thread(this, "Oyuncu Thread");
         oyuncuThread.start();
     }
 

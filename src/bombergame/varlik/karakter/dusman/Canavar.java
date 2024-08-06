@@ -42,7 +42,7 @@ public abstract class Canavar extends Karakter implements Runnable {
         _gecenZaman = 20;
         this.olumModeli = olumModeli;
 
-        dusmanThread = new Thread(this);
+        dusmanThread = new Thread(this, "Dusman Thread");
         dusmanThread.start();
     }
 
