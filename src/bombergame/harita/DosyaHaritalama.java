@@ -56,6 +56,7 @@ public class DosyaHaritalama extends Haritalama implements SabitDegiskenler {
     public void varlikOlustur() {
         for (int y = 0; y < getYukseklik(); y++) {
             for (int x = 0; x < getGenislik(); x++) {
+                haritaMatrix[y][x] = 0;
                 haritaVarlikEkle(satir[y].charAt(x), x, y);
             }
         }

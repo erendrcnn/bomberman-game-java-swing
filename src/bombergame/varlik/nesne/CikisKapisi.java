@@ -42,9 +42,6 @@ public class CikisKapisi extends Zemin {
 
         if (e instanceof Oyuncu) {
 
-            if (_oyunTahtasi.dusmanlarTemizlendi() == false)
-                return false;
-
             if (e.getXBoyut() == getX() && e.getYBoyut() == getY()) {
                 if (_oyunTahtasi.dusmanlarTemizlendi())
                     _oyunTahtasi.seviyeAtlama();

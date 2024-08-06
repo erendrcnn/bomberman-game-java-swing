@@ -8,15 +8,13 @@ import bombergame.varlik.karakter.Oyuncu;
 import bombergame.varlik.karakter.dusman.Canavar;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.io.*;
 
-public class Oyun extends Canvas implements MouseListener, MouseMotionListener, SabitDegiskenler {
+public class Oyun extends Canvas implements MouseListener, MouseMotionListener, WindowListener, SabitDegiskenler {
 
     /*
     >> SABIT DEGISKENLER
@@ -56,6 +54,7 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
     private boolean ayarlarMenusu = false;
     public boolean oyunBitti = false;
     public boolean oyunYenilendi = false;
+    private boolean _oyunPasif = false;
 
     private Klavye _girdi;
     private OyunTahtasi _oyunTahtasi;
@@ -69,6 +68,8 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
         this._pencere = pencere;
         this._pencere.setTitle(BASLIK);
         this._pencere.setIconImage(uygulamaLogo);
+        this._pencere.setLocationRelativeTo(null);
+        this._pencere.addWindowListener(this);
         this.ekran = new Ekran(GENISLIK, YUKSEKLIK);
         this._girdi = new Klavye();
         this._oyunTahtasi = new OyunTahtasi(this, _girdi, ekran);
@@ -118,7 +119,10 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
     }
 
     private void yenile() {
-        _girdi.update();
+        if (!_oyunPasif) {
+            _girdi.guncelle();
+        }
+
         _oyunTahtasi.guncelle();
     }
 
@@ -487,6 +491,44 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
 
     @Override
     public void mouseExited(MouseEvent e) {
+    }
+
+    /*
+    >> PENCERE OLAYLARI
+     */
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+        // Pencere aktif oldugunda Klavye girislerini etkinlestir.
+        _oyunPasif = false;
+        _girdi.sifirla();
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+        // Pencere arka plana atildiginda Klavye tuslarini sifirla.
+        _oyunPasif = true;
+        _girdi.sifirla();
     }
 
     /*

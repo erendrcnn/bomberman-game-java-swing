@@ -10,6 +10,8 @@ import bombergame.varlik.KatmanliNesne;
 import bombergame.varlik.Mesaj;
 import bombergame.varlik.Nesne;
 import bombergame.varlik.karakter.dusman.Canavar;
+import bombergame.varlik.nesne.CikisKapisi;
+import bombergame.varlik.nesne.Duvar;
 import bombergame.varlik.nesne.ozellik.Ozellik;
 import bombergame.varlik.saldiri.Bomba;
 import bombergame.varlik.saldiri.PatlamaYayilim;
@@ -125,12 +127,18 @@ public class Oyuncu extends Karakter implements Runnable {
     */
     private void bombaTetikleyici() {
         if (_girdi.bomba && Oyun.getBombaCephane() > 0 && _timeBetweenPutBombs < 0) {
-            int xt = Koordinat.pikseldenHuceye(_x + (double) _model.getSize() / 2);
-            int yt = Koordinat.pikseldenHuceye((_y + _model.getSize() / 2) - _model.getSize()); // Oyuncunun yarı yüksekliğini çıkar
+            int xt = Koordinat.pikseldenHucreye(_x + (double) _model.getSize() / 2);
+            int yt = Koordinat.pikseldenHucreye((_y + _model.getSize() / 2) - _model.getSize()); // Oyuncunun yarı yüksekliğini çıkar
 
-            bombaYerlestir(xt, yt);
-            Oyun.addBombaCephane(-1);
-            _timeBetweenPutBombs = 30;
+            if (haritaMatrix[yt][xt] == 1) {
+                if (_oyunTahtasi.getVarlikKonum(xt, yt) instanceof KatmanliNesne)
+                    if (((KatmanliNesne) _oyunTahtasi.getVarlikKonum(xt, yt)).getBasVarlik() instanceof CikisKapisi)
+                        return;
+
+                bombaYerlestir(xt, yt);
+                Oyun.addBombaCephane(-1);
+                _timeBetweenPutBombs = 30;
+            }
         }
     }
 
@@ -200,22 +208,29 @@ public class Oyuncu extends Karakter implements Runnable {
 
     @Override
     public boolean hareketEdebilirMi(double x, double y) {
+        boolean atlamaMekanizmasi = true;
         for (int c = 0; c < 4; c++) {
             double xt = ((_x + x) + c % 2 * 13) / Oyun.KARE_BOYUT;
             double yt = ((_y + y) + c / 2 * 12 - 13) / Oyun.KARE_BOYUT;
 
-            Nesne a = _oyunTahtasi.getVarlik(xt, yt, this);
+            Nesne a = _oyunTahtasi.getVarlikKonum(xt, yt);
             if (!a.kesisme(this)) {
                 if (!Oyun.getAtlama()) {
                     takilmaKontrol(a);
                 }
 
-                // System.out.println(a);
-                // KatmanliNesne üzerinden geçebilir ama etrafında saglam bir duvar varsa geçemez
-                return a instanceof KatmanliNesne && Oyun.getAtlama();
+                // KatmanliNesne üzerinden geçebilir ama etrafında Duvar nesnesi varsa geçemez
+                if (!Oyun.getAtlama())
+                    return false;
+                if (Oyun.getAtlama() && a instanceof Duvar) {
+                    atlamaMekanizmasi = false;
+                }
             }
         }
-        return true;
+
+        if (Oyun.getAtlama() && atlamaMekanizmasi) {
+            return true;
+        } else return !Oyun.getAtlama();
     }
 
     private void takilmaKontrol(Nesne a) {

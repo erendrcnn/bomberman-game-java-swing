@@ -41,10 +41,10 @@ public abstract class Nesne implements Guncelleme, SabitDegiskenler {
     }
 
     public int getXBoyut() {
-        return Koordinat.pikseldenHuceye(_x + _model.UZUNLUK / 2); // UZUNLUK degerinin yarisi eklenerak tahmin edilen merkez bulunur.
+        return Koordinat.pikseldenHucreye(_x + _model.UZUNLUK / 2); // UZUNLUK degerinin yarisi eklenerak tahmin edilen merkez bulunur.
     }
 
     public int getYBoyut() {
-        return Koordinat.pikseldenHuceye(_y - _model.UZUNLUK / 2); // UZUNLUK degerinin yarisi cikarilarak tahmin edilen merkez bulunur.
+        return Koordinat.pikseldenHucreye(_y - _model.UZUNLUK / 2); // UZUNLUK degerinin yarisi cikarilarak tahmin edilen merkez bulunur.
     }
 }

@@ -8,7 +8,7 @@ public class Klavye implements KeyListener {
     private final boolean[] tuslar = new boolean[160]; // Klavye tuslarini tutmak icin kullanilir.
     public boolean yukariHareket, asagiHareket, solHareket, sagHareket, bomba, kumanda, mola;
 
-    public void update() {
+    public void guncelle() {
         yukariHareket = tuslar[KeyEvent.VK_UP] || tuslar[KeyEvent.VK_W];
         asagiHareket = tuslar[KeyEvent.VK_DOWN] || tuslar[KeyEvent.VK_S];
         solHareket = tuslar[KeyEvent.VK_LEFT] || tuslar[KeyEvent.VK_A];
@@ -16,6 +16,16 @@ public class Klavye implements KeyListener {
         bomba = tuslar[KeyEvent.VK_SPACE] || tuslar[KeyEvent.VK_Z];
         kumanda = tuslar[KeyEvent.VK_B];
         mola = tuslar[KeyEvent.VK_ESCAPE];
+    }
+
+    public void sifirla() {
+        yukariHareket = false;
+        asagiHareket = false;
+        solHareket = false;
+        sagHareket = false;
+        bomba = false;
+        kumanda = false;
+        mola = false;
     }
 
     @Override

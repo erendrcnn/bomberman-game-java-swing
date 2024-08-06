@@ -80,10 +80,12 @@ public class Bomba extends AnimasyonluNesne {
         _uzerindenAtlanabilir = true;
         _patladi = true;
 
+        // Bomba patladiginda bombanin oldugu hucredeki karakteri oldurur.
         Karakter a = _oyunTahtasi.getKarakterKonum(_x, _y);
         if (a != null) {
             a.oldur();
         }
+
         _alevler = new PatlamaYayilim[4];
         for (int i = 0; i < _alevler.length; i++) {
             _alevler[i] = new PatlamaYayilim((int) _x, (int) _y, i, Oyun.getBombaAlan(), _oyunTahtasi);

@@ -9,17 +9,17 @@ public class KatmanliNesne extends Nesne {
 
     protected LinkedList<Nesne> _varliklar = new LinkedList<>();
 
-    public KatmanliNesne(int x, int y, Nesne... entities) {
+    public KatmanliNesne(int x, int y, Nesne... nesneler) {
         _x = x;
         _y = y;
 
-        for (int i = 0; i < entities.length; i++) {
-            _varliklar.add(entities[i]);
+        for (int i = 0; i < nesneler.length; i++) {
+            _varliklar.add(nesneler[i]);
 
             // Patlama sonrasinda patlayan nesnelerin altina gizlenen nesneleri ekler.
             if (i > 1) {
-                if (entities[i] instanceof KirilganZemin)
-                    ((KirilganZemin) entities[i]).altTabakayaEkle(entities[i - 1].getModel());
+                if (nesneler[i] instanceof KirilganZemin)
+                    ((KirilganZemin) nesneler[i]).altTabakayaEkle(nesneler[i - 1].getModel());
             }
         }
     }
@@ -44,13 +44,13 @@ public class KatmanliNesne extends Nesne {
 
         if (top.kaldirildiMi()) {
             haritaMatrix[(int) _varliklar.getLast()._y][(int) _varliklar.getLast()._x] = 1;
-            /* KONTROL AMACLI
-            System.out.println(_entities.getLast()._x + " " + _entities.getLast()._y );
+            /*
+            System.out.println(_varliklar.getLast()._x + " " + _varliklar.getLast()._y );
             for (int i = 0; i < 13; i++) {
-                for (int j = 0; j < 33; j++) System.out.print(matrix[i][j] + " ");
+                for (int j = 0; j < 33; j++) System.out.print(haritaMatrix[i][j] + " ");
                 System.out.println();
             }
-            */
+             */
             _varliklar.removeLast();
         }
     }

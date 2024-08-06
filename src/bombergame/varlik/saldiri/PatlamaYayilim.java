@@ -29,7 +29,7 @@ public class PatlamaYayilim extends Nesne {
         int x = (int) _x;
         int y = (int) _y;
         for (int i = 0; i < _alevler.length; i++) {
-            sonuncuMu = i == _alevler.length - 1 ? true : false;
+            sonuncuMu = i == _alevler.length - 1;
 
             switch (_yon) {
                 case 0:

@@ -215,8 +215,8 @@ public abstract class Canavar extends Karakter implements Runnable {
             }
         }
 
-        int xx = Koordinat.pikseldenHuceye(xr) + (int) x;
-        int yy = Koordinat.pikseldenHuceye(yr) + (int) y;
+        int xx = Koordinat.pikseldenHucreye(xr) + (int) x;
+        int yy = Koordinat.pikseldenHucreye(yr) + (int) y;
 
         Nesne a = _oyunTahtasi.getVarlik(xx, yy, this); // Hareket etmek istediğimiz konumdaki nesne
 

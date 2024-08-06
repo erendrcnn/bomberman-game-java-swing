@@ -3,6 +3,7 @@ package bombergame;
 import bombergame.gui.Klavye;
 import bombergame.harita.DosyaHaritalama;
 import bombergame.harita.Haritalama;
+import bombergame.harita.Koordinat;
 import bombergame.medya.Ekran;
 import bombergame.medya.Guncelleme;
 import bombergame.varlik.Mesaj;
@@ -433,7 +434,7 @@ public class OyunTahtasi implements Guncelleme {
     public Karakter getKarakterKonum(double x, double y) {
         try {
             for (Karakter cur : _karakterler) {
-                if (cur.getX() == x && cur.getY() == y)
+                if (Koordinat.pikseldenHucreye(cur.getX()) == (int) x && Koordinat.pikseldenHucreye(cur.getY()) - 1 == (int) y)
                     return cur;
             }
 
@@ -487,6 +488,9 @@ public class OyunTahtasi implements Guncelleme {
     }
 
     public Nesne getVarlikKonum(double x, double y) {
+        if (x < 0 || y < 0 || x >= _haritalama.getGenislik() || y >= _haritalama.getYukseklik())
+            return null;
+
         return _varliklar[(int) x + (int) y * _haritalama.getGenislik()];
     }
 

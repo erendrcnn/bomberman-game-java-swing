@@ -4,7 +4,7 @@ import bombergame.Oyun;
 
 public class Koordinat {
 
-    public static int pikseldenHuceye(double i) {
+    public static int pikseldenHucreye(double i) {
         return (int) (i / Oyun.KARE_BOYUT);
     }
 
