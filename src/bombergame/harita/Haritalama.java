@@ -8,7 +8,13 @@ public abstract class Haritalama implements IHaritalama {
     protected OyunTahtasi oyunTahtasi;
 
     public Haritalama(String dosyaYolu, OyunTahtasi oyunTahtasi) {
-        haritaYukle(dosyaYolu);
+        this.oyunTahtasi = oyunTahtasi;
+        if (dosyaYolu != null) {
+            haritaYukle(dosyaYolu);
+        }
+    }
+
+    protected Haritalama(OyunTahtasi oyunTahtasi) {
         this.oyunTahtasi = oyunTahtasi;
     }
 

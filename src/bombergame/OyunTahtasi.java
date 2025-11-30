@@ -2,6 +2,7 @@ package bombergame;
 
 import bombergame.gui.Klavye;
 import bombergame.harita.DosyaHaritalama;
+import bombergame.harita.HafizaHaritalama;
 import bombergame.harita.Haritalama;
 import bombergame.harita.Koordinat;
 import bombergame.medya.Ekran;
@@ -14,14 +15,9 @@ import bombergame.varlik.karakter.dusman.Canavar;
 import bombergame.varlik.nesne.ozellik.Ozellik;
 import bombergame.varlik.saldiri.Bomba;
 import bombergame.varlik.saldiri.Patlama;
-
 import java.awt.*;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.net.URL;
-import java.util.List;
 import java.util.*;
+import java.util.List;
 
 public class OyunTahtasi implements Guncelleme {
 
@@ -149,19 +145,20 @@ public class OyunTahtasi implements Guncelleme {
         _varliklar = null;
 
         // Haritayi olustur
-        haritaDosyasiOlustur("dunya/Harita.txt", 13, 33, seciliOzellik);
+        List<String> mapData = haritaOlustur(13, 33, seciliOzellik);
 
         if (DEMO_MODE)
             _haritalama = new DosyaHaritalama("dunya/HaritaTest.txt", this);
         else
-            _haritalama = new DosyaHaritalama("dunya/Harita.txt", this);
+            _haritalama = new HafizaHaritalama(mapData, 33, 13, this);
 
         _varliklar = new Nesne[_haritalama.getYukseklik() * _haritalama.getGenislik()];
 
         _haritalama.varlikOlustur();
+        oyunDevam();
     }
 
-    public static void haritaDosyasiOlustur(String dosyaYolu, int yukseklik, int genislik, char ozellikSembolu) {
+    public static List<String> haritaOlustur(int yukseklik, int genislik, char ozellikSembolu) {
         // Harita boyutları
         char[][] harita = new char[yukseklik][genislik];
 
@@ -226,19 +223,12 @@ public class OyunTahtasi implements Guncelleme {
             }
         }
 
-        // Haritayı dosyaya yaz
-        URL absPath = OyunTahtasi.class.getResource("/" + dosyaYolu);
-        assert absPath != null;
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(absPath.getPath()))) {
-            writer.write(yukseklik + " " + genislik);
-            writer.newLine();
-            for (char[] row : harita) {
-                writer.write(row);
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        // Haritayı listeye ekle
+        List<String> mapData = new ArrayList<>();
+        for (char[] row : harita) {
+            mapData.add(new String(row));
         }
+        return mapData;
     }
 
     public boolean ozellikKullanildiMi(int x, int y) {
@@ -546,7 +536,7 @@ public class OyunTahtasi implements Guncelleme {
             for (Nesne entity : _varliklar) {
                 entity.guncelle();
             }
-        } catch (ConcurrentModificationException | NoSuchElementException | NullPointerException _) {
+        } catch (ConcurrentModificationException | NoSuchElementException | NullPointerException e) {
         }
     }
 
@@ -559,7 +549,7 @@ public class OyunTahtasi implements Guncelleme {
                     karakter.guncelle();
                 }
             }
-        } catch (ConcurrentModificationException | NoSuchElementException | NullPointerException _) {
+        } catch (ConcurrentModificationException | NoSuchElementException | NullPointerException e) {
         }
     }
 
@@ -570,7 +560,7 @@ public class OyunTahtasi implements Guncelleme {
             for (Bomba bomba : _bombalar) {
                 bomba.guncelle();
             }
-        } catch (ConcurrentModificationException | NoSuchElementException | NullPointerException _) {
+        } catch (ConcurrentModificationException | NoSuchElementException | NullPointerException e) {
         }
     }
 
@@ -582,7 +572,7 @@ public class OyunTahtasi implements Guncelleme {
             for (Mesaj message : _mesajlar) {
                 message.setSure(message.getSure() - 1);
             }
-        } catch (ConcurrentModificationException | NoSuchElementException | NullPointerException _) {
+        } catch (ConcurrentModificationException | NoSuchElementException | NullPointerException e) {
         }
     }
 

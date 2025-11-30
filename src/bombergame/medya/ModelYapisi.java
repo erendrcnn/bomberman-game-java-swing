@@ -1,11 +1,10 @@
 package bombergame.medya;
 
 import bombergame.SabitDegiskenler;
-
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import javax.imageio.ImageIO;
 
 public class ModelYapisi implements SabitDegiskenler {
     public int[] pikseller;
@@ -22,14 +21,20 @@ public class ModelYapisi implements SabitDegiskenler {
     private void load() {
         try {
             URL url = ModelYapisi.class.getResource(dosyaYolu);
-            assert url != null;
+            if (url == null) {
+                System.err.println("Dosya bulunamadi: " + dosyaYolu);
+                return;
+            }
             BufferedImage image = ImageIO.read(url);
+            if (image == null) {
+                System.err.println("Resim okunamadi: " + dosyaYolu);
+                return;
+            }
             int w = image.getWidth();
             int h = image.getHeight();
             image.getRGB(0, 0, w, h, pikseller, 0, w);
         } catch (IOException e) {
             e.printStackTrace();
-            System.exit(0);
         }
     }
 

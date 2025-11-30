@@ -1,8 +1,7 @@
 package bombergame.medya;
 
+import java.net.URL;
 import javax.sound.sampled.*;
-import java.io.File;
-import java.io.IOException;
 
 public class Muzik {
     private Clip ses = null;
@@ -11,59 +10,63 @@ public class Muzik {
 
     public Muzik(String sesDosyasi) {
         dosyaYolu = sesDosyasi;
-        File f = new File("./" + sesDosyasi);
         AudioInputStream sesGirdi = null;
 
         try {
-            sesGirdi = AudioSystem.getAudioInputStream(f.toURI().toURL());
-        } catch (IOException | UnsupportedAudioFileException e) {
+            URL url = getClass().getResource("/" + sesDosyasi);
+            if (url != null) {
+                sesGirdi = AudioSystem.getAudioInputStream(url);
+            } else {
+                System.err.println("Ses dosyasi bulunamadi: " + sesDosyasi);
+            }
+        } catch (Exception e) {
+            System.err.println("Ses dosyasi okunurken hata: " + sesDosyasi);
             e.printStackTrace();
         }
 
         try {
             this.ses = AudioSystem.getClip();
-        } catch (LineUnavailableException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            this.ses.open(sesGirdi);
-        } catch (IOException | LineUnavailableException e) {
-            e.printStackTrace();
+            if (sesGirdi != null && this.ses != null) {
+                this.ses.open(sesGirdi);
+            }
+        } catch (Exception e) {
+            System.err.println("Ses sistemi baslatilamadi veya format desteklenmiyor: " + e.getMessage());
+            this.ses = null;
         }
     }
 
     public void muzikCal(int _loop) {
         if (!this.kapali) {
-            File f = new File("./" + dosyaYolu);
             AudioInputStream sesGirdi = null;
 
             try {
-                sesGirdi = AudioSystem.getAudioInputStream(f.toURI().toURL());
-            } catch (IOException | UnsupportedAudioFileException e) {
+                URL url = getClass().getResource("/" + dosyaYolu);
+                if (url != null) {
+                    sesGirdi = AudioSystem.getAudioInputStream(url);
+                }
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
             try {
                 this.ses = AudioSystem.getClip();
-            } catch (LineUnavailableException e) {
-                e.printStackTrace();
+                if (sesGirdi != null && this.ses != null) {
+                    this.ses.open(sesGirdi);
+                    this.ses.start();
+                    this.ses.loop(_loop);
+                }
+            } catch (Exception e) {
+                System.err.println("Muzik calinirken hata: " + e.getMessage());
+                this.ses = null;
             }
-
-            try {
-                this.ses.open(sesGirdi);
-            } catch (IOException | LineUnavailableException e) {
-                e.printStackTrace();
-            }
-
-            this.ses.start();
-            this.ses.loop(_loop);
         }
     }
 
     public void muzikDurdur() {
         this.kapali = true;
-        this.ses.stop();
+        if (this.ses != null) {
+            this.ses.stop();
+        }
     }
 
     public void setKapali(boolean kapali) {

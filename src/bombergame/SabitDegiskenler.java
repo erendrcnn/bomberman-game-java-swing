@@ -3,9 +3,8 @@ package bombergame;
 import bombergame.medya.Model;
 import bombergame.medya.ModelYapisi;
 import bombergame.medya.Muzik;
-
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 /*
  >> Bu arayüz, oyunun tum sabit degiskenlerini ve sabit nesnelerini icerir.
@@ -15,26 +14,26 @@ public interface SabitDegiskenler {
     int HARITA_YUKSEKLIK = 13;
     int[][] haritaMatrix = new int[HARITA_YUKSEKLIK][HARITA_GENISLIK]; // HARITA BOYUTU
 
-    String kayitDosyasi = "res/veri/kayit.txt";
-    String skorDosyasi = "res/veri/MaxSkor.txt";
-    String fontDosyasi1 = "res/font/OYUNFONT1.otf";             // Font: JOYSTICK
-    String fontDosyasi2 = "res/font/OYUNFONT2.ttf";             // Font: VBBRUSHTB Bold
-    String ayarlarPanel = "res/model/ayarlar-tablo.png";
-    String arkaPlanPanel = "res/model/anamenu.png";
-    String yeniOyunPanel = "res/model/yeni-oyun.png";
-    String skorPanel = "res/model/skor-tablo.png";
+    String kayitDosyasi = "kayit.txt";
+    String skorDosyasi = "MaxSkor.txt";
+    String fontDosyasi1 = "font/OYUNFONT1.otf";             // Font: JOYSTICK
+    String fontDosyasi2 = "font/OYUNFONT2.ttf";             // Font: VBBRUSHTB Bold
+    String ayarlarPanel = "model/ayarlar-tablo.png";
+    String arkaPlanPanel = "model/anamenu.png";
+    String yeniOyunPanel = "model/yeni-oyun.png";
+    String skorPanel = "model/skor-tablo.png";
 
     Color arkaPlanRenk = new Color(0, 173, 57, 255);
     Color arkaPlanRenk2 = new Color(62, 62, 62, 255);
     Color arkaPlanRenk3 = new Color(51, 152, 75, 255);
     Color arkaPlanRenk4 = new Color(244, 215, 169, 255);
 
-    Muzik oyunMuzik = new Muzik("res/muzik/Tema.wav");
-    Muzik bombaYerlestirMuzik = new Muzik("res/muzik/BombaKoyma.wav");
-    Muzik bombaPatlamaMuzik = new Muzik("res/muzik/Patlama.wav");
-    Muzik olumMuzik = new Muzik("res/muzik/DarbeAlma.wav");
-    Muzik esyaAlmaMuzik = new Muzik("res/muzik/EsyaAlma.wav");
-    Muzik duvarKirmaMuzik = new Muzik("res/muzik/Kirilma.wav");
+    Muzik oyunMuzik = new Muzik("muzik/Tema.wav");
+    Muzik bombaYerlestirMuzik = new Muzik("muzik/BombaKoyma.wav");
+    Muzik bombaPatlamaMuzik = new Muzik("muzik/Patlama.wav");
+    Muzik olumMuzik = new Muzik("muzik/DarbeAlma.wav");
+    Muzik esyaAlmaMuzik = new Muzik("muzik/EsyaAlma.wav");
+    Muzik duvarKirmaMuzik = new Muzik("muzik/Kirilma.wav");
 
     ModelYapisi karakter = new ModelYapisi("/model/karakter.png", 64);
     ModelYapisi bomba = new ModelYapisi("/model/bomba.png", 64);
@@ -121,10 +120,10 @@ public interface SabitDegiskenler {
     Model sag_alt_sinir4 = new Model(16, 2, 3, ModelYapisi.harita4);
     Model sol_alt_sinir4 = new Model(16, 3, 3, ModelYapisi.harita4);
 
-    ImageIcon barIkon = new ImageIcon((new ImageIcon("res/model/merkez-bar.png")).getImage().getScaledInstance(80, 30, Image.SCALE_DEFAULT));
-    ImageIcon ayarlarIkon = new ImageIcon((new ImageIcon("res/model/ayarlar.png")).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
-    ImageIcon sesIkon = new ImageIcon((new ImageIcon("res/model/sesli.png")).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
-    ImageIcon sessizIkon = new ImageIcon((new ImageIcon("res/model/sessiz.png")).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
-    ImageIcon sifirlaIkon = new ImageIcon((new ImageIcon("res/model/sifirla.png")).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
-    Image uygulamaLogo = new ImageIcon("res/model/logo.png").getImage();
+    ImageIcon barIkon = new ImageIcon((new ImageIcon(SabitDegiskenler.class.getResource("/model/merkez-bar.png"))).getImage().getScaledInstance(80, 30, Image.SCALE_DEFAULT));
+    ImageIcon ayarlarIkon = new ImageIcon((new ImageIcon(SabitDegiskenler.class.getResource("/model/ayarlar.png"))).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+    ImageIcon sesIkon = new ImageIcon((new ImageIcon(SabitDegiskenler.class.getResource("/model/sesli.png"))).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+    ImageIcon sessizIkon = new ImageIcon((new ImageIcon(SabitDegiskenler.class.getResource("/model/sessiz.png"))).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+    ImageIcon sifirlaIkon = new ImageIcon((new ImageIcon(SabitDegiskenler.class.getResource("/model/sifirla.png"))).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+    Image uygulamaLogo = new ImageIcon(SabitDegiskenler.class.getResource("/model/logo.png")).getImage();
 }

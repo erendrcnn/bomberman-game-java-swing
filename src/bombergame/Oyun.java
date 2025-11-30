@@ -6,7 +6,6 @@ import bombergame.medya.Ekran;
 import bombergame.varlik.karakter.Karakter;
 import bombergame.varlik.karakter.Oyuncu;
 import bombergame.varlik.karakter.dusman.Canavar;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferStrategy;
@@ -95,11 +94,16 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
 
         System.arraycopy(ekran._pikseller, 0, pikseller, 0, pikseller.length);
 
-        Graphics g = bs.getDrawGraphics();
-        g.drawImage(resim, 0, 0, getWidth(), getHeight(), null);
-        _oyunTahtasi.mesajCiz(g);
-
-        g.dispose();
+        Graphics g = null;
+        try {
+            g = bs.getDrawGraphics();
+            g.drawImage(resim, 0, 0, getWidth(), getHeight(), null);
+            _oyunTahtasi.mesajCiz(g);
+        } catch (Exception e) {
+            return;
+        } finally {
+            if (g != null) g.dispose();
+        }
         bs.show();
     }
 
@@ -111,10 +115,15 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
         }
 
         ekran.temizle();
-        Graphics g = bs.getDrawGraphics();
-        _oyunTahtasi.ekranGoster(g);
-
-        g.dispose();
+        Graphics g = null;
+        try {
+            g = bs.getDrawGraphics();
+            _oyunTahtasi.ekranGoster(g);
+        } catch (Exception e) {
+            return;
+        } finally {
+            if (g != null) g.dispose();
+        }
         bs.show();
     }
 
@@ -249,7 +258,9 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
     }
 
     public void oyunKayitOku() {
-        try (BufferedReader in = new BufferedReader(new FileReader(kayitDosyasi))) {
+        File file = new File(kayitDosyasi);
+        if (!file.exists()) return;
+        try (BufferedReader in = new BufferedReader(new FileReader(file))) {
             _oyunTahtasi.setPuanlar(Integer.parseInt(in.readLine()));
             _oyunTahtasi.setZaman(Integer.parseInt(in.readLine()));
             _oyunTahtasi.setSeviye(Integer.parseInt(in.readLine()));
@@ -272,11 +283,21 @@ public class Oyun extends Canvas implements MouseListener, MouseMotionListener, 
     }
 
     public void maxSkorOku() {
-        try (BufferedReader read = new BufferedReader(new FileReader(new File(skorDosyasi)))) {
-            String score = read.readLine().trim();
-            _maxPuan = score == null ? 0 : Integer.parseInt(score);
+        File file = new File(skorDosyasi);
+        if (!file.exists()) {
+            _maxPuan = 0;
+            return;
+        }
+        try (BufferedReader read = new BufferedReader(new FileReader(file))) {
+            String score = read.readLine();
+            if (score != null) {
+                _maxPuan = Integer.parseInt(score.trim());
+            } else {
+                _maxPuan = 0;
+            }
         } catch (IOException e) {
             e.printStackTrace();
+            _maxPuan = 0;
         }
     }
 

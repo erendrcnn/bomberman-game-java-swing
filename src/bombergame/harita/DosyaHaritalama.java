@@ -14,7 +14,6 @@ import bombergame.varlik.nesne.Duvar;
 import bombergame.varlik.nesne.Koridor;
 import bombergame.varlik.nesne.duvar.SaglamZemin;
 import bombergame.varlik.nesne.ozellik.*;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -25,6 +24,10 @@ public class DosyaHaritalama extends Haritalama implements SabitDegiskenler {
 
     public DosyaHaritalama(String dosyaYolu, OyunTahtasi oyunTahtasi) {
         super(dosyaYolu, oyunTahtasi);
+    }
+
+    protected DosyaHaritalama(OyunTahtasi oyunTahtasi) {
+        super(oyunTahtasi);
     }
 
     @Override

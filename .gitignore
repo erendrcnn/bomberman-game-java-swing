@@ -1,3 +1,11 @@
 /bin
 /res/graphic
-/.idea/workspace.xml
+/.idea/
+/target/
+*.class
+*.log
+.vscode/
+.settings/
+.classpath
+.project
+*.iml

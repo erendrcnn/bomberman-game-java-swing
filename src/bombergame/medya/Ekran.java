@@ -5,13 +5,12 @@ import bombergame.OyunTahtasi;
 import bombergame.SabitDegiskenler;
 import bombergame.varlik.Nesne;
 import bombergame.varlik.karakter.Oyuncu;
-
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Arrays;
+import javax.imageio.ImageIO;
 
 public class Ekran implements SabitDegiskenler {
     protected int _genislik, _yukseklik;
@@ -38,13 +37,17 @@ public class Ekran implements SabitDegiskenler {
         _pikseller = new int[width * height];
 
         try {
-            ayarlar = ImageIO.read(new File(ayarlarPanel));
+            URL url = getClass().getResource("/" + ayarlarPanel);
+            if (url != null) ayarlar = ImageIO.read(url);
+            else System.err.println("Ayarlar paneli bulunamadi: " + ayarlarPanel);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         try {
-            arkaPlan = ImageIO.read(new File(arkaPlanPanel));
+            URL url = getClass().getResource("/" + arkaPlanPanel);
+            if (url != null) arkaPlan = ImageIO.read(url);
+            else System.err.println("Arka plan paneli bulunamadi: " + arkaPlanPanel);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -55,7 +58,7 @@ public class Ekran implements SabitDegiskenler {
             arkaPlan = new BufferedImage(Oyun.GENISLIK * Oyun.OLCEK, Oyun.YUKSEKLIK * Oyun.OLCEK, BufferedImage.TYPE_INT_RGB);
 
         try {
-            yeniOyunGorseli = ImageIO.read(new File(yeniOyunPanel));
+            yeniOyunGorseli = ImageIO.read(getClass().getResource("/" + yeniOyunPanel));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -127,25 +130,24 @@ public class Ekran implements SabitDegiskenler {
 
     public void yaziTipiYukle() {
         try {
-            File fontFile1 = new File(fontDosyasi1);
-            File fontFile2 = new File(fontDosyasi2);
-            yaziTipi1 = Font.createFont(Font.TRUETYPE_FONT, fontFile1).deriveFont(Font.PLAIN, 60);
-            yaziTipi2 = Font.createFont(Font.TRUETYPE_FONT, fontFile2).deriveFont(Font.PLAIN, 60);
+            yaziTipi1 = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/" + fontDosyasi1)).deriveFont(Font.PLAIN, 60);
+            yaziTipi2 = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/" + fontDosyasi2)).deriveFont(Font.PLAIN, 60);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(yaziTipi1);
             ge.registerFont(yaziTipi2);
         } catch (IOException | FontFormatException e) {
-            //Handle exception
+            e.printStackTrace();
         }
     }
 
     public void oyunBittiCiz(Graphics g, int points, int highscore) {
         BufferedImage image = null;
         try {
-            image = ImageIO.read(new File(skorPanel));
+            image = ImageIO.read(getClass().getResource("/" + skorPanel));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        if (image == null) return;
         int targetWidth = image.getWidth() * Oyun.OLCEK / 4;
         int targetHeight = image.getHeight() * Oyun.OLCEK / 4;
         Image scoreTable = image.getScaledInstance(targetWidth, targetHeight, Image.SCALE_DEFAULT);
